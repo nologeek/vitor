@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------- */
+/*  Variante dark basada en atributo [data-theme] (no solo prefers),           */
+/*  para permitir toggle manual + persistencia.                                */
+/* -------------------------------------------------------------------------- */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* -------------------------------------------------------------------------- */
+/*  Design tokens -> utilidades de Tailwind (bg-bg, text-fg, border-border...) */
+/*  `inline` mantiene la referencia var() para que el tema cambie en runtime.  */
+/* -------------------------------------------------------------------------- */
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-ring: var(--ring);
+
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Paletas (Dual: light y dark diseñadas con el mismo cuidado)                */
+/* -------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #f7f8fa;
+  --surface-2: #eef0f4;
+  --fg: #0a0c11;
+  --muted: #5b616e;
+  --border: #e3e6ec;
+  --accent: #4f46e5;
+  --accent-fg: #ffffff;
+  --ring: #4f46e5;
+}
+
+[data-theme="dark"] {
+  --bg: #07080b;
+  --surface: #0e1016;
+  --surface-2: #161922;
+  --fg: #f2f4f8;
+  --muted: #9aa1b1;
+  --border: #20242e;
+  --accent: #8b8bf5;
+  --accent-fg: #07080b;
+  --ring: #8b8bf5;
+}
+
+/* Preferencia del sistema para usuarios sin JS (antes de que el script fije el tema). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #07080b;
+    --surface: #0e1016;
+    --surface-2: #161922;
+    --fg: #f2f4f8;
+    --muted: #9aa1b1;
+    --border: #20242e;
+    --accent: #8b8bf5;
+    --accent-fg: #07080b;
+    --ring: #8b8bf5;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Base                                                                        */
+/* -------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 28%, transparent);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Utilidades de superficie (uso puntual en secciones)                        */
+/* -------------------------------------------------------------------------- */
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in oklab, var(--border) 60%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--border) 60%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 0%,
+      #000 40%,
+      transparent 75%
+    );
+    mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 0%,
+      #000 40%,
+      transparent 75%
+    );
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      120deg,
+      var(--fg) 0%,
+      color-mix(in oklab, var(--accent) 70%, var(--fg)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}

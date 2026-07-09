@@ -84,3 +84,4 @@ Al migrar a dominio propio, ver [`docs/ROADMAP.md`](docs/ROADMAP.md) (Fase 7).
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — decisiones técnicas.
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — fases del proyecto.
 - [`docs/DESIGN-PRINCIPLES.md`](docs/DESIGN-PRINCIPLES.md) — principios visuales.
+- [`docs/MOTION.md`](docs/MOTION.md) — sistema de motion y scroll storytelling.

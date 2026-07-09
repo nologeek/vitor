@@ -8,7 +8,7 @@ semánticos.
 | 0    | Auditoría del repo `vitor` y planificación                      | ✅ Completada |
 | 1    | Base técnica: Next.js, TS, Tailwind, estructura, SEO, rutas     | 🟩 En curso   |
 | 2    | Home con el contenido final entregado por Manuel                | ⬜ Pendiente  |
-| 3    | `/design-system` como laboratorio visual completo               | 🟨 Iniciada   |
+| 3    | `/design-system` como laboratorio visual completo               | 🟩 v1 lista   |
 | 4    | Portafolio, proyectos, logos y estructura de casos              | ⬜ Pendiente  |
 | 5    | Blog/contenidos y estrategia SEO/AEO                            | ⬜ Pendiente  |
 | 6    | Performance, accesibilidad, Core Web Vitals, optimización       | ⬜ Pendiente  |

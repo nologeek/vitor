@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Tag } from "@/components/ui/tag";
+import { Button } from "@/components/ui/button";
 import { hero } from "@/content/home";
 
 export function Hero() {
@@ -26,18 +26,10 @@ export function Hero() {
         </ul>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Link
-            href={hero.primaryCta.href}
-            className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg transition-transform hover:-translate-y-0.5"
-          >
-            {hero.primaryCta.label}
-          </Link>
-          <Link
-            href={hero.secondaryCta.href}
-            className="inline-flex h-12 items-center justify-center rounded-full border border-border px-6 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
-          >
+          <Button href={hero.primaryCta.href}>{hero.primaryCta.label}</Button>
+          <Button href={hero.secondaryCta.href} variant="secondary">
             {hero.secondaryCta.label}
-          </Link>
+          </Button>
         </div>
       </Container>
     </section>

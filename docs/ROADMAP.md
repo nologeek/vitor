@@ -22,6 +22,10 @@ semánticos.
 - [x] Layout raíz (header, footer, skip-link, JSON-LD)
 - [x] Home: Hero (frase aprobada) + Círculo Dorado (WHY/HOW/WHAT)
 - [x] Ruta `/design-system` inicial
+- [x] Rutas base navegables e indexables (stubs con placeholder controlado):
+      `/sobre-mi`, `/portafolio`, `/servicios`, `/metodo`, `/blog`, `/contacto`
+- [x] Navegación derivada de fuente única (`routes` en `site-config.ts`):
+      header curado + footer completo; sitemap sincronizado
 - [x] SEO base: metadata, sitemap, robots, JSON-LD
 - [x] Export estático + workflow de GitHub Pages
 - [ ] Primer deploy verde en Pages

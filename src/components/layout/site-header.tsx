@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { nav, siteConfig } from "@/lib/site-config";
+import { headerNav, siteConfig } from "@/lib/site-config";
 
 export function SiteHeader() {
   return (
@@ -16,16 +16,21 @@ export function SiteHeader() {
           <span className="text-accent">.</span>
         </Link>
 
-        <nav aria-label="Principal" className="flex items-center gap-1">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-full px-3 py-1.5 text-sm text-muted transition-colors hover:bg-surface hover:text-fg"
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav
+          aria-label="Principal"
+          className="flex min-w-0 items-center gap-1"
+        >
+          <div className="flex items-center gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {headerNav.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className="whitespace-nowrap rounded-full px-3 py-1.5 text-sm text-muted transition-colors hover:bg-surface hover:text-fg"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
           <span className="mx-2 hidden h-5 w-px bg-border sm:block" />
           <ThemeToggle />
         </nav>

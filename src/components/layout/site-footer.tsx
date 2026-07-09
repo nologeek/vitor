@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { nav, siteConfig } from "@/lib/site-config";
+import { footerNav, siteConfig } from "@/lib/site-config";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -16,11 +16,14 @@ export function SiteFooter() {
           <p className="mt-1 max-w-xs text-sm text-muted">{siteConfig.role}</p>
         </div>
 
-        <nav aria-label="Pie de página" className="flex flex-wrap gap-x-5 gap-y-2">
-          {nav.map((item) => (
+        <nav
+          aria-label="Pie de página"
+          className="grid grid-cols-2 gap-x-8 gap-y-2 sm:flex sm:flex-wrap sm:gap-x-5"
+        >
+          {footerNav.map((item) => (
             <Link
-              key={item.href}
-              href={item.href}
+              key={item.path}
+              href={item.path}
               className="text-sm text-muted transition-colors hover:text-fg"
             >
               {item.label}

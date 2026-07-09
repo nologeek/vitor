@@ -48,9 +48,11 @@ export function StickyStorySection({
             <p className="mt-4 font-mono text-6xl font-semibold text-gradient">
               {String(active + 1).padStart(2, "0")}
             </p>
-            <h4 className="mt-4 text-2xl font-semibold tracking-tight">
+            {/* Espejo visual del paso activo (no es heading: el heading real
+               vive en la lista de pasos de abajo, para no duplicar semántica). */}
+            <p aria-hidden="true" className="mt-4 text-2xl font-semibold tracking-tight">
               {steps[active].title}
-            </h4>
+            </p>
             <p className="mt-2 leading-relaxed text-muted">
               {steps[active].body}
             </p>
@@ -80,13 +82,13 @@ export function StickyStorySection({
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent lg:hidden">
               Paso {i + 1}
             </p>
-            <h4
+            <h3
               className={`text-2xl font-semibold tracking-tight transition-opacity duration-300 ${
                 i === active ? "opacity-100" : "lg:opacity-35"
               }`}
             >
               {step.title}
-            </h4>
+            </h3>
             <p
               className={`mt-2 max-w-md leading-relaxed text-muted transition-opacity duration-300 ${
                 i === active ? "opacity-100" : "lg:opacity-35"

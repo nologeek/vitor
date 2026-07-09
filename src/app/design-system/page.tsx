@@ -93,7 +93,7 @@ export default function DesignSystemPage() {
           id="tipografia"
           index="03"
           title="Tipografía"
-          description="Geist Sans para lectura, Geist Mono para señales técnicas (eyebrows, etiquetas y metadatos)."
+          description="Geist Sans para lectura, Geist Mono para señales técnicas (eyebrows, etiquetas y metadatos). Satoshi es la tipografía deseada a futuro: el token --font-sans ya resuelve a Satoshi si está disponible y cae a Geist si no (ver docs/FONTS.md); hoy Geist está activo."
         >
           <div className="divide-y divide-border">
             <TypeRow token="Display / H1" cls="text-4xl sm:text-5xl font-semibold tracking-tight">
@@ -436,8 +436,18 @@ export default function DesignSystemPage() {
           id="motion"
           index="10"
           title="Motion & Scroll Storytelling"
-          description="Prototipos de motion premium: aparición por scroll, storytelling sticky, fondo de datos y cards con vida. Ligero, accesible y respetando prefers-reduced-motion. Aún NO aplicado al home."
+          description="Prototipos de motion premium: aparición por scroll, storytelling sticky, fondo de datos y cards con vida. Ligero, accesible y respetando prefers-reduced-motion."
         >
+          <div className="mb-10 rounded-[var(--radius-card)] border border-accent/40 bg-surface p-5 text-sm text-muted">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+              Estado (Fase 3.1)
+            </span>{" "}
+            — Hero, La oportunidad, Más allá del marketing, La propuesta,
+            Pilares, Activos, Método (sticky) y Perfil híbrido/Para quién ya
+            usan estos patrones en el <strong>home real</strong>. Ver{" "}
+            <code className="font-mono text-xs">docs/MOTION.md</code> para el
+            detalle completo.
+          </div>
           <div className="space-y-14">
             {/* Hero con fondo de nodos */}
             <div>
@@ -620,11 +630,11 @@ const motionUsage: ReadonlyArray<{ title: string; body: string }> = [
   },
   {
     title: "StickyStorySection",
-    body: "Para explicar un proceso por pasos (p. ej. el método). Solo cuando aporte narrativa. En mobile degrada a lista apilada.",
+    body: "Para explicar un proceso por pasos con orden real (usado en el Método del home: Diagnóstico → Evolución). Evítalo si los ítems no tienen progresión narrativa. En mobile degrada a lista apilada.",
   },
   {
     title: "DataNetworkBackground / MotionCard",
-    body: "Fondo de nodos muy sutil detrás de secciones clave (hero); MotionCard en cards de pilares/portafolio/servicios. Ambos se reducen o desactivan en mobile y con reduce-motion.",
+    body: "Fondo de nodos muy sutil, reservado al hero (firma visual única). MotionCard en cards de pilares, activos y portafolio/servicios (fases futuras). Ambos se reducen o desactivan en mobile y con reduce-motion.",
   },
 ];
 

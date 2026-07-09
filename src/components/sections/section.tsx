@@ -9,12 +9,16 @@ export function Section({
   id,
   ariaLabelledby,
   divider = false,
+  /** Desactiva el padding vertical propio (p. ej. cuando el hijo ya trae el
+   * suyo, como CinematicSection). */
+  padded = true,
   className = "",
   children,
 }: {
   id?: string;
   ariaLabelledby?: string;
   divider?: boolean;
+  padded?: boolean;
   className?: string;
   children: ReactNode;
 }) {
@@ -22,7 +26,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={ariaLabelledby}
-      className={`py-16 sm:py-24 ${divider ? "border-t border-border" : ""} ${className}`}
+      className={`${padded ? "py-16 sm:py-24" : ""} ${divider ? "border-t border-border" : ""} ${className}`}
     >
       <Container>{children}</Container>
     </section>

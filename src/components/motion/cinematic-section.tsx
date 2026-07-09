@@ -11,6 +11,7 @@ export function CinematicSection({
   as: TitleTag = "h2",
   align = "left",
   children,
+  contentClassName,
   className = "",
 }: {
   eyebrow?: string;
@@ -18,6 +19,8 @@ export function CinematicSection({
   as?: "h2" | "h3";
   align?: "left" | "center";
   children?: ReactNode;
+  /** Clases del contenedor de contenido (ancho/estilo). Sobrescribe el default. */
+  contentClassName?: string;
   className?: string;
 }) {
   return (
@@ -36,9 +39,9 @@ export function CinematicSection({
       </TitleTag>
       {children ? (
         <div
-          className={`mt-6 max-w-xl text-lg leading-relaxed text-muted ${
-            align === "center" ? "mx-auto" : ""
-          }`}
+          className={`mt-6 ${
+            contentClassName ?? "max-w-xl text-lg leading-relaxed text-muted"
+          } ${align === "center" ? "mx-auto" : ""}`}
         >
           {children}
         </div>

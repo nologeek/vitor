@@ -37,6 +37,8 @@ export function DataNetworkBackground({
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     const isMobile = window.matchMedia("(max-width: 640px)").matches;
     const allowInteractive = interactive && !coarse && !reduceMotion;
+    // En mobile o con reduce-motion: un solo frame estático (sin loop).
+    const staticRender = reduceMotion || isMobile;
     const maxDist = 130;
 
     let width = 0;
@@ -155,7 +157,7 @@ export function DataNetworkBackground({
     init();
 
     let io: IntersectionObserver | null = null;
-    if (reduceMotion) {
+    if (staticRender) {
       draw();
     } else {
       io = new IntersectionObserver((entries) => {
@@ -169,7 +171,7 @@ export function DataNetworkBackground({
 
     const ro = new ResizeObserver(() => {
       init();
-      if (reduceMotion) draw();
+      if (staticRender) draw();
     });
     ro.observe(parent);
 
@@ -190,7 +192,7 @@ export function DataNetworkBackground({
 
     const themeObserver = new MutationObserver(() => {
       readColor();
-      if (reduceMotion) draw();
+      if (staticRender) draw();
     });
     themeObserver.observe(document.documentElement, {
       attributes: true,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import type { PointerEvent, ReactNode } from "react";
+import type { ElementType, PointerEvent, ReactNode } from "react";
 
 /**
  * Contenedor de card con hover premium (borde luminoso, elevación mínima,
@@ -10,17 +10,19 @@ import type { PointerEvent, ReactNode } from "react";
  * completa se anula con prefers-reduced-motion (vía CSS .motion-card).
  */
 export function MotionCard({
+  as: Tag = "div",
   spotlight = true,
   className = "",
   children,
 }: {
+  as?: ElementType;
   spotlight?: boolean;
   className?: string;
   children: ReactNode;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
-  function handleMove(e: PointerEvent<HTMLDivElement>) {
+  function handleMove(e: PointerEvent<HTMLElement>) {
     if (!spotlight || e.pointerType !== "mouse") return;
     const el = ref.current;
     if (!el) return;
@@ -30,9 +32,9 @@ export function MotionCard({
   }
 
   return (
-    <div ref={ref} onPointerMove={handleMove} className={`motion-card ${className}`}>
+    <Tag ref={ref} onPointerMove={handleMove} className={`motion-card ${className}`}>
       {spotlight ? <span className="motion-card__spot" aria-hidden="true" /> : null}
       {children}
-    </div>
+    </Tag>
   );
 }

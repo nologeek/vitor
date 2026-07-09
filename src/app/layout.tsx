@@ -18,6 +18,24 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+/**
+ * Satoshi (tipografía principal deseada) aún no está disponible como archivo
+ * local — no se descarga sin aprobación. globals.css ya usa
+ * `var(--font-satoshi, var(--font-geist-sans))`, así que activarla es un
+ * cambio de una sola línea, sin tocar el resto del sistema. Ver docs/FONTS.md.
+ *
+ *   import localFont from "next/font/local";
+ *   const satoshi = localFont({
+ *     src: [
+ *       { path: "./fonts/Satoshi-Variable.woff2", style: "normal" },
+ *       { path: "./fonts/Satoshi-VariableItalic.woff2", style: "italic" },
+ *     ],
+ *     variable: "--font-satoshi",
+ *     display: "swap",
+ *   });
+ *   // y añadir `satoshi.variable` a la className del <html> de abajo.
+ */
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   ...buildMetadata(),

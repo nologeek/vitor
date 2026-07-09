@@ -214,3 +214,80 @@
     transition: none;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Motion system (prototipos). Hover premium, glass, glow. Ligero, CSS puro.  */
+/* -------------------------------------------------------------------------- */
+.motion-card {
+  position: relative;
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.motion-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--accent) 25%, transparent),
+    0 18px 50px -22px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+
+/* Spotlight que sigue el puntero (solo se ve en hover; desktop). */
+.motion-card__spot {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--accent) 16%, transparent),
+    transparent 70%
+  );
+}
+
+.motion-card:hover .motion-card__spot {
+  opacity: 1;
+}
+
+/* Superficie glass premium. */
+.glass {
+  background: color-mix(in oklab, var(--surface) 65%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+}
+
+/* Halo/glow muy sutil detrás de un bloque. */
+.glow-halo {
+  position: relative;
+  isolation: isolate;
+}
+
+.glow-halo::before {
+  content: "";
+  position: absolute;
+  inset: -30% 10% auto 10%;
+  height: 70%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--accent) 28%, transparent),
+    transparent 70%
+  );
+  filter: blur(48px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-card {
+    transition: none;
+  }
+  .motion-card:hover {
+    transform: none;
+  }
+}

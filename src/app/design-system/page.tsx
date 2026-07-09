@@ -9,6 +9,11 @@ import { Swatch } from "@/components/design-system/swatch";
 import { LabFrame } from "@/components/design-system/lab-frame";
 import { Reveal } from "@/components/design-system/reveal";
 import { NodesGraphic } from "@/components/design-system/nodes-graphic";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
+import { MotionCard } from "@/components/motion/motion-card";
+import { CinematicSection } from "@/components/motion/cinematic-section";
+import { StickyStorySection } from "@/components/motion/sticky-story-section";
+import { DataNetworkBackground } from "@/components/motion/data-network-background";
 import { NumberedCard } from "@/components/cards/numbered-card";
 import { StepCard } from "@/components/cards/step-card";
 import { ProjectCard } from "@/components/cards/project-card";
@@ -17,7 +22,7 @@ import { LogoCard } from "@/components/cards/logo-card";
 import { MetricCard } from "@/components/cards/metric-card";
 import { QuoteCard } from "@/components/cards/quote-card";
 import { buildMetadata } from "@/lib/seo";
-import { pillars, method } from "@/content/home";
+import { pillars, method, hero } from "@/content/home";
 import {
   colorGroups,
   tagExamples,
@@ -27,6 +32,7 @@ import {
   sampleMetrics,
   sampleQuote,
   usageRules,
+  stickyStoryDemo,
 } from "@/content/design-system";
 
 export const metadata = buildMetadata({
@@ -425,10 +431,156 @@ export default function DesignSystemPage() {
           </p>
         </DSSection>
 
-        {/* 10 · Reglas de uso */}
+        {/* 10 · Motion & Scroll Storytelling */}
+        <DSSection
+          id="motion"
+          index="10"
+          title="Motion & Scroll Storytelling"
+          description="Prototipos de motion premium: aparición por scroll, storytelling sticky, fondo de datos y cards con vida. Ligero, accesible y respetando prefers-reduced-motion. Aún NO aplicado al home."
+        >
+          <div className="space-y-14">
+            {/* Hero con fondo de nodos */}
+            <div>
+              <DSLabel>Hero con fondo de nodos · DataNetworkBackground</DSLabel>
+              <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-bg">
+                <DataNetworkBackground className="opacity-40" density={0.8} />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent"
+                  aria-hidden="true"
+                />
+                <div className="relative p-8 sm:p-12">
+                  <p className="font-mono text-xs text-accent">
+                    {hero.greeting}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-2xl font-semibold tracking-tight text-gradient sm:text-4xl">
+                    {hero.headline}
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {hero.tags.slice(0, 4).map((t) => (
+                      <Tag key={t}>{t}</Tag>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex gap-3">
+                    <MockPill primary>Hablemos</MockPill>
+                    <MockPill>Ver proyectos</MockPill>
+                  </div>
+                </div>
+              </div>
+              <p className="mt-3 text-sm text-muted">
+                Fondo muy sutil (opacidad baja), pausado fuera de viewport,
+                estático en mobile / reduce-motion. El titular no se anima en el
+                primer render.
+              </p>
+            </div>
+
+            {/* Sección cinemática */}
+            <div>
+              <DSLabel>Sección cinemática amplia · CinematicSection</DSLabel>
+              <div className="glow-halo overflow-hidden rounded-[var(--radius-card)] border border-border bg-surface px-6 sm:px-10">
+                <CinematicSection
+                  as="h3"
+                  eyebrow="HOW · Sistema"
+                  title="Ecosistemas que conectan negocio, marca, datos e inteligencia."
+                >
+                  Bloque alto, mucho espacio negativo, titular grande y texto
+                  corto. El ritmo lo marca el scroll.
+                </CinematicSection>
+              </div>
+            </div>
+
+            {/* Sticky storytelling */}
+            <div>
+              <DSLabel>Sticky storytelling por pasos · StickyStorySection</DSLabel>
+              <div className="rounded-[var(--radius-card)] border border-border bg-surface p-6 sm:p-8">
+                <StickyStorySection label="Método" steps={stickyStoryDemo} />
+              </div>
+              <p className="mt-3 text-sm text-muted">
+                Panel fijo con <code className="font-mono text-xs">position: sticky</code>{" "}
+                nativo (sin scroll-jacking). En mobile degrada a lista apilada.
+              </p>
+            </div>
+
+            {/* Cards con motion + reveal stagger */}
+            <div>
+              <DSLabel>Grilla de cards con motion · MotionCard + ScrollReveal</DSLabel>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {pillars.items.slice(0, 3).map((item, i) => (
+                  <ScrollReveal
+                    key={item.title}
+                    animation="slide-up"
+                    delay={i * 90}
+                  >
+                    <MotionCard className="h-full rounded-[var(--radius-card)] border border-border bg-surface p-6">
+                      <span className="font-mono text-sm text-accent">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="mt-3 text-lg font-semibold tracking-tight">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">
+                        {item.description}
+                      </p>
+                    </MotionCard>
+                  </ScrollReveal>
+                ))}
+              </div>
+              <p className="mt-3 text-sm text-muted">
+                Aparición con stagger + hover premium (borde luminoso, elevación
+                mínima y spotlight en desktop).
+              </p>
+            </div>
+
+            {/* Capas visuales / microinteracciones */}
+            <div>
+              <DSLabel>Capas visuales y microinteracciones</DSLabel>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <div className="glass rounded-[var(--radius-card)] p-6">
+                  <p className="font-medium">Glass surface</p>
+                  <p className="mt-1 text-sm text-muted">
+                    Superficie translúcida con blur.
+                  </p>
+                </div>
+                <div className="glow-halo rounded-[var(--radius-card)] border border-border bg-surface p-6">
+                  <p className="font-medium">Glow halo</p>
+                  <p className="mt-1 text-sm text-muted">
+                    Halo de acento muy sutil.
+                  </p>
+                </div>
+                <MotionCard className="rounded-[var(--radius-card)] border border-border bg-surface p-6">
+                  <p className="font-medium">Motion card</p>
+                  <p className="mt-1 text-sm text-muted">
+                    Pasa el cursor: borde + spotlight.
+                  </p>
+                </MotionCard>
+              </div>
+            </div>
+
+            {/* Cuándo usar cada patrón */}
+            <div>
+              <DSLabel>Cuándo usar cada patrón</DSLabel>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {motionUsage.map((rule) => (
+                  <div
+                    key={rule.title}
+                    className="rounded-[var(--radius-card)] border border-border bg-surface p-6"
+                  >
+                    <h3 className="text-lg font-semibold tracking-tight">
+                      {rule.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                      {rule.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </DSSection>
+
+        {/* 11 · Reglas de uso */}
         <DSSection
           id="reglas"
-          index="10"
+          index="11"
           title="Reglas de uso"
           description="Criterios para mantener coherencia visual y accesibilidad."
         >
@@ -456,6 +608,25 @@ export default function DesignSystemPage() {
 /* -------------------------------------------------------------------------- */
 /*  Helpers locales del laboratorio                                            */
 /* -------------------------------------------------------------------------- */
+
+const motionUsage: ReadonlyArray<{ title: string; body: string }> = [
+  {
+    title: "ScrollReveal",
+    body: "Para aparición suave de textos, listas y cards al entrar en viewport. Usa stagger (delay incremental) en grids. Evítalo en el titular LCP del hero.",
+  },
+  {
+    title: "CinematicSection",
+    body: "Para intros de bloque con titular grande y mucho aire. Ideal en las aperturas de WHY/HOW/WHAT. No abuses: una o dos por página.",
+  },
+  {
+    title: "StickyStorySection",
+    body: "Para explicar un proceso por pasos (p. ej. el método). Solo cuando aporte narrativa. En mobile degrada a lista apilada.",
+  },
+  {
+    title: "DataNetworkBackground / MotionCard",
+    body: "Fondo de nodos muy sutil detrás de secciones clave (hero); MotionCard en cards de pilares/portafolio/servicios. Ambos se reducen o desactivan en mobile y con reduce-motion.",
+  },
+];
 
 function TypeRow({
   token,

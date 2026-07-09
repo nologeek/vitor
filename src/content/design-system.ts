@@ -14,8 +14,29 @@ export const dsSections = [
   { id: "layouts", label: "Layouts" },
   { id: "navegacion", label: "Navegación" },
   { id: "animaciones", label: "Animaciones" },
+  { id: "motion", label: "Motion & Scroll" },
   { id: "reglas", label: "Reglas de uso" },
 ] as const;
+
+/* Pasos de demostración para el prototipo de sticky storytelling. */
+export const stickyStoryDemo: ReadonlyArray<{ title: string; body: string }> = [
+  {
+    title: "Diagnóstico",
+    body: "Se lee el negocio, la marca, los usuarios, los procesos y la tecnología para entender qué debe conectarse.",
+  },
+  {
+    title: "Arquitectura",
+    body: "Se define el modelo de crecimiento, la narrativa, la experiencia y la ruta de implementación.",
+  },
+  {
+    title: "Construcción",
+    body: "Se construyen plataformas, contenidos, automatizaciones e integraciones con medición desde el inicio.",
+  },
+  {
+    title: "Evolución",
+    body: "Se optimiza, se documenta y se escala con estrategia, datos e inteligencia artificial.",
+  },
+];
 
 /* Paleta agrupada por rol semántico. */
 export const colorGroups: ReadonlyArray<{

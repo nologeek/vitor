@@ -18,6 +18,24 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+/**
+ * Satoshi (tipografía principal deseada) aún no está disponible como archivo
+ * local — no se descarga sin aprobación. globals.css ya usa
+ * `var(--font-satoshi, var(--font-geist-sans))`, así que activarla es un
+ * cambio de una sola línea, sin tocar el resto del sistema. Ver docs/FONTS.md.
+ *
+ *   import localFont from "next/font/local";
+ *   const satoshi = localFont({
+ *     src: [
+ *       { path: "./fonts/Satoshi-Variable.woff2", style: "normal" },
+ *       { path: "./fonts/Satoshi-VariableItalic.woff2", style: "italic" },
+ *     ],
+ *     variable: "--font-satoshi",
+ *     display: "swap",
+ *   });
+ *   // y añadir `satoshi.variable` a la className del <html> de abajo.
+ */
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   ...buildMetadata(),
@@ -50,7 +68,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-fg"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent-solid focus:px-4 focus:py-2 focus:text-accent-fg"
         >
           Saltar al contenido
         </a>

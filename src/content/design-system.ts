@@ -41,7 +41,12 @@ export const stickyStoryDemo: ReadonlyArray<{ title: string; body: string }> = [
 /* Paleta agrupada por rol semántico. */
 export const colorGroups: ReadonlyArray<{
   group: string;
-  swatches: ReadonlyArray<{ name: string; varName: string; hint: string }>;
+  swatches: ReadonlyArray<{
+    name: string;
+    varName?: string;
+    hex?: string;
+    hint: string;
+  }>;
 }> = [
   {
     group: "Superficies y fondos",
@@ -52,18 +57,32 @@ export const colorGroups: ReadonlyArray<{
     ],
   },
   {
-    group: "Texto",
+    group: "Texto y bordes",
     swatches: [
       { name: "Foreground", varName: "--color-fg", hint: "Texto principal" },
       { name: "Muted", varName: "--color-muted", hint: "Texto secundario" },
+      { name: "Border", varName: "--color-border", hint: "Bordes y divisores" },
     ],
   },
   {
-    group: "Bordes y acento",
+    group: "Acento · azul de marca",
     swatches: [
-      { name: "Border", varName: "--color-border", hint: "Bordes y divisores" },
-      { name: "Accent", varName: "--color-accent", hint: "Acción y foco" },
-      { name: "Accent FG", varName: "--color-accent-fg", hint: "Texto sobre acento" },
+      { name: "Accent Blue", hex: "#325FEC", hint: "Principal · CTAs, foco, activo" },
+      {
+        name: "Accent Blue Light",
+        hex: "#518FFF",
+        hint: "Secundario · glows, hover, nodos",
+      },
+      {
+        name: "Accent (semántico)",
+        varName: "--color-accent",
+        hint: "Se ajusta por tema para contraste AA",
+      },
+      {
+        name: "Accent FG",
+        varName: "--color-accent-fg",
+        hint: "Texto sobre acento (botón sólido)",
+      },
     ],
   },
 ];

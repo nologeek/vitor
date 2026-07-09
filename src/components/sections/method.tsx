@@ -1,6 +1,6 @@
 import { Section } from "@/components/sections/section";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { StepCard } from "@/components/cards/step-card";
+import { StickyStorySection } from "@/components/motion/sticky-story-section";
 import { method } from "@/content/home";
 
 export function Method() {
@@ -9,17 +9,15 @@ export function Method() {
       <SectionHeading eyebrow={method.eyebrow} title={method.title}>
         {method.intro}
       </SectionHeading>
-      <ol className="mt-12 max-w-2xl">
-        {method.steps.map((step, i) => (
-          <StepCard
-            key={step.title}
-            index={i + 1}
-            title={step.title}
-            description={step.description}
-            isLast={i === method.steps.length - 1}
-          />
-        ))}
-      </ol>
+      <div className="mt-14">
+        <StickyStorySection
+          label="Método"
+          steps={method.steps.map((s) => ({
+            title: s.title,
+            body: s.description,
+          }))}
+        />
+      </div>
     </Section>
   );
 }

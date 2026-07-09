@@ -1,151 +1,587 @@
+import type { ReactNode } from "react";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { Tag } from "@/components/ui/tag";
+import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
+import { DSNav } from "@/components/design-system/ds-nav";
+import { DSSection, DSLabel } from "@/components/design-system/ds-section";
+import { Swatch } from "@/components/design-system/swatch";
+import { LabFrame } from "@/components/design-system/lab-frame";
+import { Reveal } from "@/components/design-system/reveal";
+import { NodesGraphic } from "@/components/design-system/nodes-graphic";
+import { NumberedCard } from "@/components/cards/numbered-card";
+import { StepCard } from "@/components/cards/step-card";
+import { ProjectCard } from "@/components/cards/project-card";
+import { ServiceCard } from "@/components/cards/service-card";
+import { LogoCard } from "@/components/cards/logo-card";
+import { MetricCard } from "@/components/cards/metric-card";
+import { QuoteCard } from "@/components/cards/quote-card";
 import { buildMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site-config";
+import { pillars, method } from "@/content/home";
+import {
+  colorGroups,
+  tagExamples,
+  sampleProjects,
+  sampleServices,
+  sampleLogos,
+  sampleMetrics,
+  sampleQuote,
+  usageRules,
+} from "@/content/design-system";
 
 export const metadata = buildMetadata({
   title: "Design System",
   description:
-    "Laboratorio vivo del sistema de diseño: colores, tipografía, componentes, estados y layouts del ecosistema de marca de Manuel Ayala.",
+    "Laboratorio vivo del sistema de diseño: colores, tipografía, componentes, cards, layouts, navegación, animaciones y reglas de uso del ecosistema de marca de Manuel Ayala.",
   path: "/design-system",
 });
-
-const TOKENS: ReadonlyArray<{ name: string; varName: string }> = [
-  { name: "Background", varName: "--color-bg" },
-  { name: "Surface", varName: "--color-surface" },
-  { name: "Surface 2", varName: "--color-surface-2" },
-  { name: "Foreground", varName: "--color-fg" },
-  { name: "Muted", varName: "--color-muted" },
-  { name: "Border", varName: "--color-border" },
-  { name: "Accent", varName: "--color-accent" },
-];
 
 export default function DesignSystemPage() {
   return (
     <Container className="py-16 sm:py-24">
-      <SectionHeading eyebrow="Laboratorio" title="Sistema de diseño">
-        Documento vivo donde construimos y validamos el lenguaje visual del
-        proyecto. Cambia el tema con el botón de la cabecera para ver cada token
-        en claro y oscuro.
-      </SectionHeading>
+      {/* 01 · Introducción */}
+      <header id="introduccion" className="scroll-mt-32">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+          01 · Laboratorio
+        </p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
+          Sistema de diseño
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+          Este es el laboratorio visual del ecosistema digital de Manuel Ayala:
+          el espacio para construir, probar y documentar el lenguaje de diseño
+          antes de llevarlo al home o a páginas internas. Cambia el tema con el
+          botón de la cabecera para ver cada elemento en claro y oscuro.
+        </p>
+        <div className="mt-8 max-w-md rounded-[var(--radius-card)] border border-border bg-surface p-6">
+          <NodesGraphic />
+        </div>
+      </header>
 
-      {/* Colores / tokens */}
-      <DSBlock title="1 · Colores y tokens">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {TOKENS.map((token) => (
-            <div
-              key={token.varName}
-              className="overflow-hidden rounded-[var(--radius-card)] border border-border"
+      <DSNav />
+
+      <div className="space-y-16">
+        {/* 02 · Color */}
+        <DSSection
+          id="color"
+          index="02"
+          title="Paleta de color"
+          description="Tokens semánticos por rol. Cambian de valor entre claro y oscuro manteniendo el mismo nombre."
+        >
+          <div className="space-y-8">
+            {colorGroups.map((g) => (
+              <div key={g.group}>
+                <DSLabel>{g.group}</DSLabel>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                  {g.swatches.map((s) => (
+                    <Swatch key={s.varName} {...s} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </DSSection>
+
+        {/* 03 · Tipografía */}
+        <DSSection
+          id="tipografia"
+          index="03"
+          title="Tipografía"
+          description="Geist Sans para lectura, Geist Mono para señales técnicas (eyebrows, etiquetas y metadatos)."
+        >
+          <div className="divide-y divide-border">
+            <TypeRow token="Display / H1" cls="text-4xl sm:text-5xl font-semibold tracking-tight">
+              Ecosistemas digitales que crecen
+            </TypeRow>
+            <TypeRow token="Título / H2" cls="text-3xl font-semibold tracking-tight">
+              Seis pilares conectados
+            </TypeRow>
+            <TypeRow token="Subtítulo / H3" cls="text-xl font-semibold">
+              Estrategia empresarial
+            </TypeRow>
+            <TypeRow token="Cuerpo / p" cls="text-lg leading-relaxed text-muted">
+              Texto de párrafo para lectura cómoda, con color muted y buen
+              interlineado.
+            </TypeRow>
+            <TypeRow token="Caption" cls="text-sm text-muted">
+              Texto de apoyo y pies de figura.
+            </TypeRow>
+            <TypeRow token="Etiqueta / mono" cls="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+              WHY · La oportunidad
+            </TypeRow>
+            <TypeRow token="Texto pequeño" cls="text-xs text-muted">
+              Metadatos, notas legales y detalles secundarios.
+            </TypeRow>
+          </div>
+        </DSSection>
+
+        {/* 04 · Botones y CTAs */}
+        <DSSection
+          id="botones"
+          index="04"
+          title="Botones y CTAs"
+          description="Un único botón primario por vista. Secundario para acción alterna; ghost y link para acciones terciarias."
+        >
+          <DSLabel>Variantes</DSLabel>
+          <div className="flex flex-wrap items-center gap-4">
+            <Button href="#botones">Primario</Button>
+            <Button href="#botones" variant="secondary">
+              Secundario
+            </Button>
+            <Button href="#botones" variant="ghost">
+              Ghost
+            </Button>
+            <Button href="#botones" variant="link">
+              Link <span aria-hidden="true">→</span>
+            </Button>
+            <IconButton label="Ejemplo de botón de icono">
+              <PlusIcon />
+            </IconButton>
+          </div>
+
+          <DSLabel>Estados</DSLabel>
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg">
+              Normal
+            </span>
+            <span className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg outline outline-2 outline-offset-2 outline-[var(--ring)]">
+              Focus
+            </span>
+            <button
+              type="button"
+              disabled
+              className="inline-flex h-12 cursor-not-allowed items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg opacity-40"
             >
-              <div
-                className="h-20 w-full"
-                style={{ background: `var(${token.varName})` }}
-              />
-              <div className="bg-surface px-3 py-2">
-                <p className="text-sm font-medium">{token.name}</p>
-                <p className="font-mono text-xs text-muted">{token.varName}</p>
+              Disabled
+            </button>
+            <IconButton label="Icono deshabilitado" disabled>
+              <PlusIcon />
+            </IconButton>
+          </div>
+          <p className="mt-4 text-sm text-muted">
+            Los estados hover y focus son interactivos: pasa el cursor o usa el
+            teclado (Tab) sobre las variantes de arriba.
+          </p>
+        </DSSection>
+
+        {/* 05 · Badges y tags */}
+        <DSSection
+          id="badges"
+          index="05"
+          title="Badges y tags"
+          description="Etiquetas de disciplinas, categorías y estados del ecosistema."
+        >
+          <div className="flex flex-wrap gap-2">
+            {tagExamples.map((t) => (
+              <Tag key={t}>{t}</Tag>
+            ))}
+          </div>
+        </DSSection>
+
+        {/* 06 · Cards */}
+        <DSSection
+          id="cards"
+          index="06"
+          title="Cards"
+          description="Familia de cards reutilizables. Los datos mostrados son de ejemplo (ilustrativos)."
+        >
+          <div className="space-y-10">
+            <div>
+              <DSLabel>Pillar card · Method card</DSLabel>
+              <div className="grid gap-4 lg:grid-cols-2">
+                <NumberedCard
+                  index={1}
+                  title={pillars.items[0].title}
+                  description={pillars.items[0].description}
+                />
+                <ol>
+                  <StepCard
+                    index={1}
+                    title={method.steps[0].title}
+                    description={method.steps[0].description}
+                    isLast
+                  />
+                </ol>
               </div>
             </div>
-          ))}
-        </div>
-      </DSBlock>
 
-      {/* Tipografía */}
-      <DSBlock title="2 · Tipografía">
-        <div className="space-y-4">
-          <p className="text-5xl font-semibold tracking-tight">Aa — Geist Sans</p>
-          <p className="font-mono text-2xl">Aa — Geist Mono</p>
-          <div className="space-y-2 border-t border-border pt-4">
-            <p className="text-4xl font-semibold tracking-tight">Display / H1</p>
-            <p className="text-2xl font-semibold">Título / H2</p>
-            <p className="text-lg text-muted">
-              Cuerpo — texto de párrafo con color muted para lectura cómoda.
-            </p>
-            <p className="font-mono text-sm text-accent">
-              mono / eyebrow · 0.2em tracking
-            </p>
+            <div>
+              <DSLabel>Project card</DSLabel>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {sampleProjects.map((p) => (
+                  <ProjectCard key={p.title} {...p} />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <DSLabel>Service card</DSLabel>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {sampleServices.map((s) => (
+                  <ServiceCard key={s.title} {...s} icon={<SparkIcon />} />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <DSLabel>Portfolio logo card</DSLabel>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+                {sampleLogos.map((name) => (
+                  <LogoCard key={name} name={name} />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <DSLabel>Metric card</DSLabel>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {sampleMetrics.map((m) => (
+                  <MetricCard key={m.label} {...m} />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <DSLabel>Quote / testimonial card</DSLabel>
+              <div className="max-w-2xl">
+                <QuoteCard {...sampleQuote} />
+              </div>
+            </div>
           </div>
-        </div>
-      </DSBlock>
+        </DSSection>
 
-      {/* Botones */}
-      <DSBlock title="3 · Botones">
-        <div className="flex flex-wrap items-center gap-4">
-          <button className="inline-flex h-12 items-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg transition-transform hover:-translate-y-0.5">
-            Primario
-          </button>
-          <button className="inline-flex h-12 items-center rounded-full border border-border px-6 text-sm font-semibold transition-colors hover:border-accent hover:text-accent">
-            Secundario
-          </button>
-          <button className="inline-flex h-12 items-center rounded-full px-6 text-sm font-semibold text-muted transition-colors hover:bg-surface hover:text-fg">
-            Ghost
-          </button>
-        </div>
-      </DSBlock>
+        {/* 07 · Layouts de sección */}
+        <DSSection
+          id="layouts"
+          index="07"
+          title="Layouts de sección"
+          description="Patrones de composición para armar páginas. Mockups a escala reducida."
+        >
+          <div className="grid gap-6 lg:grid-cols-2">
+            <LabFrame label="Hero">
+              <MockEyebrow>Hola, soy Manuel Ayala.</MockEyebrow>
+              <p className="mt-2 text-2xl font-semibold tracking-tight text-gradient">
+                Ecosistemas digitales que generan crecimiento.
+              </p>
+              <div className="mt-4 flex gap-2">
+                <MockPill primary>Hablemos</MockPill>
+                <MockPill>Ver proyectos</MockPill>
+              </div>
+            </LabFrame>
 
-      {/* Tags */}
-      <DSBlock title="4 · Etiquetas (tags)">
-        <div className="flex flex-wrap gap-2">
-          {siteConfig.tags.map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
-        </div>
-      </DSBlock>
+            <LabFrame label="Sección narrativa">
+              <MockEyebrow>WHY · La oportunidad</MockEyebrow>
+              <p className="mt-2 text-xl font-semibold tracking-tight">
+                El crecimiento ocurre cuando todo apunta en la misma dirección.
+              </p>
+              <p className="mt-3 text-sm text-muted">
+                Cuerpo de apoyo con buen aire y jerarquía clara.
+              </p>
+            </LabFrame>
 
-      {/* Cards */}
-      <DSBlock title="5 · Cards y superficies">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-[var(--radius-card)] border border-border bg-surface p-6">
-            <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              Surface
-            </p>
-            <p className="mt-2 font-medium">Card base</p>
-            <p className="mt-1 text-sm text-muted">
-              Contenedor estándar sobre superficie con borde sutil.
-            </p>
+            <LabFrame label="Grid de cards">
+              <div className="grid grid-cols-3 gap-3">
+                {[1, 2, 3].map((n) => (
+                  <div
+                    key={n}
+                    className="rounded-lg border border-border bg-surface p-4"
+                  >
+                    <span className="font-mono text-xs text-accent">
+                      0{n}
+                    </span>
+                    <div className="mt-2 h-2 w-3/4 rounded bg-surface-2" />
+                    <div className="mt-1.5 h-2 w-1/2 rounded bg-surface-2" />
+                  </div>
+                ))}
+              </div>
+            </LabFrame>
+
+            <LabFrame label="Texto + visual">
+              <div className="grid grid-cols-2 items-center gap-4">
+                <div>
+                  <p className="text-lg font-semibold">Sistema conectado</p>
+                  <p className="mt-2 text-sm text-muted">
+                    Texto a la izquierda, apoyo visual a la derecha.
+                  </p>
+                </div>
+                <div className="rounded-lg border border-border bg-surface p-3">
+                  <NodesGraphic />
+                </div>
+              </div>
+            </LabFrame>
+
+            <LabFrame label="Sección de logos">
+              <div className="grid grid-cols-4 gap-3">
+                {sampleLogos.slice(0, 4).map((name) => (
+                  <div
+                    key={name}
+                    className="flex h-12 items-center justify-center rounded-lg border border-border bg-surface text-xs text-muted"
+                  >
+                    logo
+                  </div>
+                ))}
+              </div>
+            </LabFrame>
+
+            <LabFrame label="CTA final">
+              <div className="rounded-lg border border-border bg-surface bg-grid p-6 text-center">
+                <p className="text-lg font-semibold tracking-tight">
+                  Hablemos de lo que quieres construir.
+                </p>
+                <div className="mt-4 flex justify-center gap-2">
+                  <MockPill primary>Hablemos</MockPill>
+                  <MockPill>Ver proyectos</MockPill>
+                </div>
+              </div>
+            </LabFrame>
           </div>
-          <div className="rounded-[var(--radius-card)] border border-border bg-surface-2 p-6">
-            <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              Surface 2
-            </p>
-            <p className="mt-2 font-medium">Card elevada</p>
-            <p className="mt-1 text-sm text-muted">
-              Nivel visual superior para destacar contenido.
-            </p>
-          </div>
-          <div className="rounded-[var(--radius-card)] border border-accent bg-surface p-6">
-            <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              Accent
-            </p>
-            <p className="mt-2 font-medium">Card destacada</p>
-            <p className="mt-1 text-sm text-muted">
-              Borde de acento para estados activos o seleccionados.
-            </p>
-          </div>
-        </div>
-      </DSBlock>
+        </DSSection>
 
-      <p className="mt-16 rounded-[var(--radius-card)] border border-dashed border-border bg-surface p-6 text-sm text-muted">
-        <span className="font-mono text-accent">[PENDIENTE]</span> Próximos
-        módulos: grids y layouts, estados (hover/focus/disabled), animaciones y
-        motion, navegación, iconografía, inspiraciones y ejemplos de secciones.
-      </p>
+        {/* 08 · Navegación */}
+        <DSSection
+          id="navegacion"
+          index="08"
+          title="Navegación"
+          description="Variantes de cabecera, pie y barras con CTA. Mockups ilustrativos."
+        >
+          <div className="space-y-6">
+            <LabFrame label="Header desktop" padded={false}>
+              <div className="flex items-center justify-between px-6 py-4">
+                <MockBrand />
+                <div className="hidden items-center gap-4 text-sm text-muted sm:flex">
+                  <span>Método</span>
+                  <span>Servicios</span>
+                  <span>Portafolio</span>
+                  <span>Blog</span>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border">
+                    <SunIconMini />
+                  </span>
+                </div>
+              </div>
+            </LabFrame>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              <LabFrame label="Header mobile simple" padded={false}>
+                <div className="flex items-center justify-between px-5 py-4">
+                  <MockBrand />
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border">
+                    <MenuIcon />
+                  </span>
+                </div>
+              </LabFrame>
+
+              <LabFrame label="Navegación con CTA" padded={false}>
+                <div className="flex items-center justify-between px-5 py-4">
+                  <div className="flex gap-4 text-sm text-muted">
+                    <span>Servicios</span>
+                    <span>Método</span>
+                  </div>
+                  <MockPill primary>Hablemos</MockPill>
+                </div>
+              </LabFrame>
+            </div>
+
+            <LabFrame label="Footer" padded={false}>
+              <div className="px-6 py-6">
+                <MockBrand />
+                <div className="mt-4 grid grid-cols-2 gap-2 text-sm text-muted sm:grid-cols-4">
+                  <span>Inicio</span>
+                  <span>Servicios</span>
+                  <span>Portafolio</span>
+                  <span>Contacto</span>
+                </div>
+                <div className="mt-4 border-t border-border pt-3 text-xs text-muted">
+                  © Manuel Ayala
+                </div>
+              </div>
+            </LabFrame>
+          </div>
+        </DSSection>
+
+        {/* 09 · Animaciones */}
+        <DSSection
+          id="animaciones"
+          index="09"
+          title="Animaciones sutiles"
+          description="Microinteracciones ligeras en CSS/IntersectionObserver (sin librerías). Todas respetan prefers-reduced-motion."
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Reveal animation="fade-in">
+              <DemoBox>fade-in (al entrar en viewport)</DemoBox>
+            </Reveal>
+            <Reveal animation="slide-up">
+              <DemoBox>slide-up (al entrar en viewport)</DemoBox>
+            </Reveal>
+            <div className="ds-glow-hover flex items-center justify-center rounded-[var(--radius-card)] border border-border bg-surface p-8 text-sm text-muted">
+              glow suave (hover)
+            </div>
+            <div className="flex items-center justify-center rounded-[var(--radius-card)] border border-border bg-surface p-8">
+              <NodesGraphic />
+            </div>
+          </div>
+          <p className="mt-4 text-sm text-muted">
+            Los botones y cards de todo el sitio ya incluyen transiciones de
+            color y elevación al hover.
+          </p>
+        </DSSection>
+
+        {/* 10 · Reglas de uso */}
+        <DSSection
+          id="reglas"
+          index="10"
+          title="Reglas de uso"
+          description="Criterios para mantener coherencia visual y accesibilidad."
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            {usageRules.map((rule) => (
+              <div
+                key={rule.title}
+                className="rounded-[var(--radius-card)] border border-border bg-surface p-6"
+              >
+                <h3 className="text-lg font-semibold tracking-tight">
+                  {rule.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  {rule.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </DSSection>
+      </div>
     </Container>
   );
 }
 
-function DSBlock({
-  title,
+/* -------------------------------------------------------------------------- */
+/*  Helpers locales del laboratorio                                            */
+/* -------------------------------------------------------------------------- */
+
+function TypeRow({
+  token,
+  cls,
   children,
 }: {
-  title: string;
-  children: React.ReactNode;
+  token: string;
+  cls: string;
+  children: ReactNode;
 }) {
   return (
-    <section className="mt-14 border-t border-border pt-10">
-      <h3 className="mb-6 text-xl font-semibold tracking-tight">{title}</h3>
+    <div className="flex flex-col gap-2 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+      <p className={`${cls} text-balance`}>{children}</p>
+      <span className="shrink-0 font-mono text-xs text-muted">{token}</span>
+    </div>
+  );
+}
+
+function DemoBox({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex items-center justify-center rounded-[var(--radius-card)] border border-border bg-surface p-8 text-sm text-muted">
       {children}
-    </section>
+    </div>
+  );
+}
+
+function MockEyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+      {children}
+    </p>
+  );
+}
+
+function MockPill({
+  children,
+  primary = false,
+}: {
+  children: ReactNode;
+  primary?: boolean;
+}) {
+  return (
+    <span
+      className={`inline-flex h-8 items-center rounded-full px-4 text-xs font-semibold ${
+        primary
+          ? "bg-accent text-accent-fg"
+          : "border border-border text-muted"
+      }`}
+    >
+      {children}
+    </span>
+  );
+}
+
+function MockBrand() {
+  return (
+    <span className="font-mono text-sm font-semibold">
+      Manuel Ayala<span className="text-accent">.</span>
+    </span>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+function SparkIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
+    </svg>
+  );
+}
+
+function SunIconMini() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
   );
 }

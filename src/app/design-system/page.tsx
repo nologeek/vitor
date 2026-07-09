@@ -80,7 +80,7 @@ export default function DesignSystemPage() {
                 <DSLabel>{g.group}</DSLabel>
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                   {g.swatches.map((s) => (
-                    <Swatch key={s.varName} {...s} />
+                    <Swatch key={s.name} {...s} />
                   ))}
                 </div>
               </div>
@@ -147,16 +147,16 @@ export default function DesignSystemPage() {
 
           <DSLabel>Estados</DSLabel>
           <div className="flex flex-wrap items-center gap-4">
-            <span className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg">
+            <span className="inline-flex h-12 items-center justify-center rounded-full bg-accent-solid px-6 text-sm font-semibold text-accent-fg">
               Normal
             </span>
-            <span className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg outline outline-2 outline-offset-2 outline-[var(--ring)]">
+            <span className="inline-flex h-12 items-center justify-center rounded-full bg-accent-solid px-6 text-sm font-semibold text-accent-fg outline outline-2 outline-offset-2 outline-[var(--ring)]">
               Focus
             </span>
             <button
               type="button"
               disabled
-              className="inline-flex h-12 cursor-not-allowed items-center justify-center rounded-full bg-accent px-6 text-sm font-semibold text-accent-fg opacity-40"
+              className="inline-flex h-12 cursor-not-allowed items-center justify-center rounded-full bg-accent-solid px-6 text-sm font-semibold text-accent-fg opacity-40"
             >
               Disabled
             </button>
@@ -672,7 +672,7 @@ function MockPill({
     <span
       className={`inline-flex h-8 items-center rounded-full px-4 text-xs font-semibold ${
         primary
-          ? "bg-accent text-accent-fg"
+          ? "bg-accent-solid text-accent-fg"
           : "border border-border text-muted"
       }`}
     >

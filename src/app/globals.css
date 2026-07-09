@@ -11,8 +11,10 @@
 /*  `inline` mantiene la referencia var() para que el tema cambie en runtime.  */
 /* -------------------------------------------------------------------------- */
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
-    sans-serif;
+  /* Fuente principal: Satoshi si está disponible (var --font-satoshi), con
+     fallback limpio a Geist / system-ui. Ver docs/FONTS.md. */
+  --font-sans: var(--font-satoshi, var(--font-geist-sans)), ui-sans-serif,
+    system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
   --color-bg: var(--bg);
@@ -22,6 +24,8 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-solid: var(--accent-solid);
   --color-accent-fg: var(--accent-fg);
   --color-ring: var(--ring);
 
@@ -32,43 +36,56 @@
 /* -------------------------------------------------------------------------- */
 /*  Paletas (Dual: light y dark diseñadas con el mismo cuidado)                */
 /* -------------------------------------------------------------------------- */
+/*
+ * Identidad ~90% blanco/negro/grises. El azul de marca es solo ACENTO.
+ *   Accent principal  #325FEC  ·  Accent secundario  #518FFF
+ * Por contraste (AA): en claro el accent de texto es #325FEC; en oscuro se usa
+ * el azul más luminoso #518FFF. Los botones sólidos usan siempre --accent-solid
+ * (#325FEC + texto blanco) para garantizar contraste en ambos temas.
+ */
 :root,
 [data-theme="light"] {
   --bg: #ffffff;
-  --surface: #f7f8fa;
-  --surface-2: #eef0f4;
-  --fg: #0a0c11;
-  --muted: #5b616e;
-  --border: #e3e6ec;
-  --accent: #4f46e5;
+  --surface: #f6f8fb;
+  --surface-2: #eef1f6;
+  --fg: #081116;
+  --muted: #545f6b;
+  --border: #e4e8ef;
+  --accent: #325fec;
+  --accent-2: #518fff;
+  --accent-solid: #325fec;
   --accent-fg: #ffffff;
-  --ring: #4f46e5;
+  --ring: #325fec;
 }
 
 [data-theme="dark"] {
-  --bg: #07080b;
-  --surface: #0e1016;
-  --surface-2: #161922;
-  --fg: #f2f4f8;
-  --muted: #9aa1b1;
-  --border: #20242e;
-  --accent: #8b8bf5;
-  --accent-fg: #07080b;
-  --ring: #8b8bf5;
+  --bg: #081116;
+  --surface: #0d1a22;
+  --surface-2: #14242e;
+  --fg: #eef3f7;
+  --muted: #8b97a3;
+  --border: #1c2b35;
+  --accent: #518fff;
+  --accent-2: #325fec;
+  --accent-solid: #325fec;
+  --accent-fg: #ffffff;
+  --ring: #518fff;
 }
 
 /* Preferencia del sistema para usuarios sin JS (antes de que el script fije el tema). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --bg: #07080b;
-    --surface: #0e1016;
-    --surface-2: #161922;
-    --fg: #f2f4f8;
-    --muted: #9aa1b1;
-    --border: #20242e;
-    --accent: #8b8bf5;
-    --accent-fg: #07080b;
-    --ring: #8b8bf5;
+    --bg: #081116;
+    --surface: #0d1a22;
+    --surface-2: #14242e;
+    --fg: #eef3f7;
+    --muted: #8b97a3;
+    --border: #1c2b35;
+    --accent: #518fff;
+    --accent-2: #325fec;
+    --accent-solid: #325fec;
+    --accent-fg: #ffffff;
+    --ring: #518fff;
   }
 }
 
@@ -232,7 +249,7 @@
   border-color: var(--accent);
   box-shadow:
     0 0 0 1px color-mix(in oklab, var(--accent) 25%, transparent),
-    0 18px 50px -22px color-mix(in oklab, var(--accent) 55%, transparent);
+    0 18px 50px -22px color-mix(in oklab, var(--accent-2) 55%, transparent);
 }
 
 /* Spotlight que sigue el puntero (solo se ve en hover; desktop). */
@@ -245,7 +262,7 @@
   transition: opacity 0.35s ease;
   background: radial-gradient(
     240px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in oklab, var(--accent) 16%, transparent),
+    color-mix(in oklab, var(--accent-2) 16%, transparent),
     transparent 70%
   );
 }
@@ -277,7 +294,7 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse at center,
-    color-mix(in oklab, var(--accent) 28%, transparent),
+    color-mix(in oklab, var(--accent-2) 26%, transparent),
     transparent 70%
   );
   filter: blur(48px);

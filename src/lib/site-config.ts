@@ -34,11 +34,12 @@ export const siteConfig = {
     "Educación",
     "Investigación",
   ],
-  // Enlaces sociales — [PENDIENTE]: completar con URLs reales.
+  // Enlaces sociales — los vacíos se muestran como "Próximamente" en el footer.
   social: {
     linkedin: "",
     github: "https://github.com/nologeek",
-    x: "",
+    instagram: "",
+    tiktok: "",
   },
 } as const;
 
@@ -121,13 +122,30 @@ export const routes: ReadonlyArray<Route> = [
     nav: { header: true, footer: true },
   },
   {
+    path: "/privacidad",
+    label: "Políticas de privacidad",
+    title: "Políticas de privacidad",
+    description:
+      "Políticas de privacidad del sitio de Manuel Ayala.",
+    priority: 0.2,
+    nav: { header: false, footer: true },
+  },
+  {
+    path: "/cookies",
+    label: "Políticas de cookies",
+    title: "Políticas de cookies",
+    description: "Políticas de cookies del sitio de Manuel Ayala.",
+    priority: 0.2,
+    nav: { header: false, footer: true },
+  },
+  {
     path: "/design-system",
     label: "Design System",
     title: "Design System",
     description:
       "Laboratorio vivo del sistema de diseño: colores, tipografía, componentes, estados y layouts.",
     priority: 0.4,
-    nav: { header: false, footer: true },
+    nav: { header: false, footer: false },
   },
 ];
 

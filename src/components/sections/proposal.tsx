@@ -1,36 +1,28 @@
 import { Container } from "@/components/ui/container";
-import { CinematicSection } from "@/components/motion/cinematic-section";
-import {
-  EcosystemFlowDiagram,
-  type FlowItem,
-} from "@/components/sections/ecosystem-flow-diagram";
+import { ProposalOrbitDiagram } from "@/components/sections/proposal-orbit-diagram";
 import { proposal } from "@/content/home";
-import type { GeometricVariant } from "@/components/motion/geometric-symbol";
-
-// Símbolo por transformación (orden del contenido aprobado).
-const flowVariants: ReadonlyArray<GeometricVariant> = [
-  "node",
-  "loop",
-  "diamond",
-  "orbit",
-];
 
 export function Proposal() {
-  const items: FlowItem[] = proposal.transformations.map((t, i) => ({
-    from: t.from,
-    to: t.to,
-    variant: flowVariants[i % flowVariants.length],
-  }));
-
   return (
-    <section id="propuesta" className="border-t border-border">
+    <section id="propuesta" className="py-24 sm:py-36">
       <Container>
-        <CinematicSection eyebrow={proposal.eyebrow} title={proposal.title}>
-          {proposal.intro}
-        </CinematicSection>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+            {proposal.label}
+          </p>
+          <h2 className="mt-6 text-balance text-3xl font-semibold leading-[1.14] tracking-tight sm:text-5xl">
+            {proposal.title}
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted">
+            {proposal.intro}
+          </p>
+        </div>
 
-        <div className="pb-20 sm:pb-28">
-          <EcosystemFlowDiagram items={items} />
+        <div className="mt-20">
+          <ProposalOrbitDiagram
+            coreLabel={proposal.coreLabel}
+            items={proposal.transformations}
+          />
         </div>
       </Container>
     </section>

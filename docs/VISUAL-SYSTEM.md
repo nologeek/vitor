@@ -1,8 +1,30 @@
-# Sistema visual (refinamiento)
+# Sistema visual
 
 Decisiones de dirección de arte del home y su representación en
-[`/design-system`](../src/app/design-system/page.tsx). No cambia contenido ni
-narrativa; solo lenguaje visual, fondo, geometría y jerarquía.
+[`/design-system`](../src/app/design-system/page.tsx).
+
+## Rediseño de storytelling (fase actual)
+
+El home se rediseñó como una experiencia editorial por scroll. **Se retiraron
+las líneas divisorias duras** entre secciones (el ritmo lo dan el espacio,
+gradientes de profundidad y cambios de composición). Se retiraron los eyebrows
+en inglés (WHY/HOW/WHAT); los labels ahora son en español directo. El **Perfil
+híbrido** se ocultó del home (el contenido se conserva en `content/home.ts`).
+
+Componentes nuevos, cada uno documentado en `/design-system`:
+
+| Componente | Aplicado en |
+| --- | --- |
+| `EditorialSection` | Oportunidad · intro de "Qué se puede construir" |
+| `CharacterReveal` | Énfasis de "Más allá del marketing" · titular de Portafolio |
+| `ProposalOrbitDiagram` | La propuesta (reemplaza flow lineal) |
+| `SevenPillarsMap` | Pilares (7 pilares en órbita, sticky + lista lateral) |
+| `MethodPathway` | Método (paneles alternos con conectores dibujados) |
+| `DepthCardsRow` | Activos que se pueden construir |
+| `SiteFooter` (reescrito) | Footer real con firma, políticas y redes ("Próximamente" hasta tener URLs) |
+
+`StickyStorySection` y `EcosystemFlowDiagram` **ya no se usan en el home**; se
+conservan como patrones documentados en el laboratorio para otros contextos.
 
 ## Fondo global — `GlobalDataGridBackground`
 

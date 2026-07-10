@@ -20,6 +20,12 @@ import {
 } from "@/components/motion/geometric-symbol";
 import { EditorialCaseLayout } from "@/components/sections/editorial-case-layout";
 import { EcosystemFlowDiagram } from "@/components/sections/ecosystem-flow-diagram";
+import { EditorialSection } from "@/components/sections/editorial-section";
+import { ProposalOrbitDiagram } from "@/components/sections/proposal-orbit-diagram";
+import { SevenPillarsMap } from "@/components/sections/seven-pillars-map";
+import { MethodPathway } from "@/components/sections/method-pathway";
+import { DepthCardsRow } from "@/components/sections/depth-cards-row";
+import { CharacterReveal } from "@/components/motion/character-reveal";
 import { NumberedCard } from "@/components/cards/numbered-card";
 import { StepCard } from "@/components/cards/step-card";
 import { ProjectCard } from "@/components/cards/project-card";
@@ -28,7 +34,14 @@ import { LogoCard } from "@/components/cards/logo-card";
 import { MetricCard } from "@/components/cards/metric-card";
 import { QuoteCard } from "@/components/cards/quote-card";
 import { buildMetadata } from "@/lib/seo";
-import { pillars, method, hero } from "@/content/home";
+import {
+  hero,
+  pillars,
+  method,
+  assets,
+  opportunity as opportunityContent,
+  proposal as proposalContent,
+} from "@/content/home";
 import {
   colorGroups,
   tagExamples,
@@ -448,13 +461,14 @@ export default function DesignSystemPage() {
         >
           <div className="mb-10 rounded-[var(--radius-card)] border border-accent/40 bg-surface p-5 text-sm text-muted">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              Estado (Fase 3.1)
+              Estado
             </span>{" "}
-            — Hero, La oportunidad, Más allá del marketing, La propuesta,
-            Pilares, Activos, Método (sticky) y Perfil híbrido/Para quién ya
-            usan estos patrones en el <strong>home real</strong>. Ver{" "}
-            <code className="font-mono text-xs">docs/MOTION.md</code> para el
-            detalle completo.
+            — Tras el rediseño de storytelling del home, los patrones aplicados
+            son <strong>EditorialSection</strong>, <strong>ProposalOrbit</strong>,{" "}
+            <strong>SevenPillarsMap</strong>, <strong>MethodPathway</strong>,{" "}
+            <strong>DepthCards</strong> y <strong>CharacterReveal</strong>. El
+            sticky story y el ecosystem-flow quedan como patrones documentados
+            para otros usos. Ver <code className="font-mono text-xs">docs/MOTION.md</code>.
           </div>
           <div className="space-y-14">
             {/* Hero con fondo de nodos */}
@@ -687,20 +701,114 @@ export default function DesignSystemPage() {
           </div>
         </DSSection>
 
-        {/* 14 · Ecosystem Flow */}
+        {/* 14 · Ecosystem Flow (retirado del home, se conserva como patrón) */}
         <DSSection
           id="flow"
           index="14"
-          title="Ecosystem Flow / Proposal Transformation"
-          description="Diagrama de secuencia para representar transformaciones (entrada → salida) como arquitectura de sistema: nodos con símbolos geométricos conectados por una espina, con micro-animación al scroll. Estética de sistema, no infografía. Aplicado en el home en 'La propuesta'."
+          title="Ecosystem Flow (patrón)"
+          description="Diagrama secuencial de transformaciones (entrada → salida). En el rediseño del home fue reemplazado por el diagrama orbital; se conserva como patrón disponible para otras rutas o casos donde la secuencia lineal encaje mejor."
         >
           <EcosystemFlowDiagram items={flowDemo} />
         </DSSection>
 
-        {/* 15 · Editorial Case */}
+        {/* 15 · Editorial Section */}
+        <DSSection
+          id="editorial"
+          index="15"
+          title="Editorial Section"
+          description="Layout de sección editorial: columna izquierda con label + lista breve de ideas/metadatos, y titular grande a la derecha. Divisoria vertical sutil en desktop, sin líneas horizontales duras. Aplicado en 'Oportunidad' y en la intro de 'Qué se puede construir'."
+        >
+          <div className="rounded-[var(--radius-card)] border border-border">
+            <EditorialSection
+              label={opportunityContent.label}
+              items={opportunityContent.points}
+              title={opportunityContent.title}
+              as="h3"
+            />
+          </div>
+        </DSSection>
+
+        {/* 16 · Proposal Orbit */}
+        <DSSection
+          id="orbit"
+          index="16"
+          title="Proposal Orbit Diagram"
+          description="Diagrama circular/orbital para 'La propuesta': anillo segmentado con nodos cardinales, órbita punteada girando lento y las 4 transformaciones alrededor. Centro tipográfico. SVG + CSS puro; en mobile las transformaciones se apilan."
+        >
+          <div className="rounded-[var(--radius-card)] border border-border bg-surface px-4 py-10 sm:px-10">
+            <ProposalOrbitDiagram
+              coreLabel={proposalContent.coreLabel}
+              items={proposalContent.transformations}
+            />
+          </div>
+        </DSSection>
+
+        {/* 17 · Seven Pillars Map */}
+        <DSSection
+          id="pillars-map"
+          index="17"
+          title="Seven Pillars Ecosystem Map"
+          description="Mapa de 7 pilares distribuidos en un anillo con órbitas concéntricas. Activación por scroll (sticky del mapa + lista lateral); en mobile se apila como lista con símbolos grandes. Iconografía geométrica ~2× frente a los pilares antiguos."
+        >
+          <div className="rounded-[var(--radius-card)] border border-border bg-surface px-4 py-10 sm:px-10">
+            <SevenPillarsMap items={pillars.items} />
+          </div>
+        </DSSection>
+
+        {/* 18 · Method Pathway */}
+        <DSSection
+          id="pathway"
+          index="18"
+          title="Method Pathway"
+          description="Camino/proceso: paneles ligeros alternando lado, con conectores punteados que se dibujan al scroll y el paso activo destacado. Sin scroll-jacking; mobile apila los paneles."
+        >
+          <div className="rounded-[var(--radius-card)] border border-border bg-surface px-4 py-10 sm:px-10">
+            <MethodPathway steps={method.steps} />
+          </div>
+        </DSSection>
+
+        {/* 19 · Depth Cards */}
+        <DSSection
+          id="depth-cards"
+          index="19"
+          title="Depth Cards (activos)"
+          description="Cards verticales con icono geométrico grande, entrada desde la derecha con profundidad 3D liviana (translateZ/rotateY sutil) y stagger. Aplicadas en 'Activos que se pueden construir'."
+        >
+          <DepthCardsRow items={assets.items} />
+        </DSSection>
+
+        {/* 20 · Character Reveal */}
+        <DSSection
+          id="char-reveal"
+          index="20"
+          title="Character Reveal (sistema cargando)"
+          description="Reveal tipográfico por caracteres para momentos conceptuales: la frase se ilumina en secuencia con delay corto. Accesible (texto real vía sr-only + aria-hidden en los spans). Aplicado en 'Más allá del marketing' y en el titular de 'Portafolio'."
+        >
+          <div className="rounded-[var(--radius-card)] border border-border bg-surface p-8 sm:p-12">
+            <CharacterReveal
+              as="p"
+              text="El reto es construir sistemas donde todo se integra para generar valor."
+              className="text-balance text-xl font-medium leading-[1.5] sm:text-2xl"
+            />
+          </div>
+        </DSSection>
+
+        {/* 21 · Footer */}
+        <DSSection
+          id="footer"
+          index="21"
+          title="Footer"
+          description="Footer real con wordmark, firma 'Hecho con ♥' (el corazón toma el acento del tema, azul), navegación completa (incluye políticas), redes con estado 'Próximamente' cuando no hay URL. Minimalista y coherente."
+        >
+          <p className="text-sm text-muted">
+            Renderizado en cada página (ver <code className="font-mono text-xs">SiteFooter</code>). Vista en vivo: haz scroll al pie del laboratorio.
+          </p>
+        </DSSection>
+
+        {/* 22 · Editorial Case */}
         <DSSection
           id="editorial-case"
-          index="15"
+          index="22"
           title="Editorial Case Layout"
           description="Patrón tipo case study para /portafolio (fases futuras): columna de metadatos (Year / Deliverables / Sector) + titular grande, divisoria fina y mucho aire. Solo prototipo; aún no aplicado a una ruta real."
         >
@@ -712,10 +820,10 @@ export default function DesignSystemPage() {
           />
         </DSSection>
 
-        {/* 16 · Reglas de uso */}
+        {/* 23 · Reglas de uso */}
         <DSSection
           id="reglas"
-          index="16"
+          index="23"
           title="Reglas de uso"
           description="Criterios para mantener coherencia visual y accesibilidad."
         >

@@ -1,3 +1,4 @@
+import { GlobalDataGridBackground } from "@/components/motion/global-data-grid-background";
 import { Hero } from "@/components/sections/hero";
 import { Opportunity } from "@/components/sections/opportunity";
 import { BeyondMarketing } from "@/components/sections/beyond-marketing";
@@ -13,6 +14,9 @@ import { FinalCta } from "@/components/sections/final-cta";
 export default function HomePage() {
   return (
     <>
+      {/* Fondo global de sistema (grid + nodos), capa fixed sutil. */}
+      <GlobalDataGridBackground />
+
       <Hero />
 
       {/* WHY — por qué importa conectar marca, negocio, operación y tecnología */}

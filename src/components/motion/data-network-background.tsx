@@ -18,10 +18,14 @@ export function DataNetworkBackground({
   className = "",
   interactive = true,
   density = 1,
+  pointerTarget = "parent",
 }: {
   className?: string;
   interactive?: boolean;
   density?: number;
+  /** Dónde se escucha el mouse. "window" para fondos globales fixed cuyo
+   * contenedor tiene pointer-events-none. */
+  pointerTarget?: "parent" | "window";
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -185,9 +189,11 @@ export function DataNetworkBackground({
       mouse.x = -9999;
       mouse.y = -9999;
     };
+    const eventTarget: Window | HTMLElement =
+      pointerTarget === "window" ? window : parent;
     if (allowInteractive) {
-      parent.addEventListener("pointermove", onMove);
-      parent.addEventListener("pointerleave", onLeave);
+      eventTarget.addEventListener("pointermove", onMove as EventListener);
+      eventTarget.addEventListener("pointerleave", onLeave);
     }
 
     const themeObserver = new MutationObserver(() => {
@@ -205,11 +211,11 @@ export function DataNetworkBackground({
       io?.disconnect();
       themeObserver.disconnect();
       if (allowInteractive) {
-        parent.removeEventListener("pointermove", onMove);
-        parent.removeEventListener("pointerleave", onLeave);
+        eventTarget.removeEventListener("pointermove", onMove as EventListener);
+        eventTarget.removeEventListener("pointerleave", onLeave);
       }
     };
-  }, [interactive, density]);
+  }, [interactive, density, pointerTarget]);
 
   return (
     <canvas

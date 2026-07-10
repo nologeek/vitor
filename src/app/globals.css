@@ -195,6 +195,7 @@
 .reveal-visible {
   opacity: 1 !important;
   transform: none !important;
+  filter: none !important;
 }
 
 .ds-glow-hover {
@@ -384,6 +385,58 @@
 /* Panel que entra con leve inclinación (método). */
 .js .reveal-tilt-up {
   transform: translate3d(0, 26px, -30px) rotateX(5deg);
+}
+
+/* Blur reveal editorial (home-2): desenfoque + leve subida. */
+.js .reveal-blur-up {
+  transform: translateY(18px);
+  filter: blur(10px);
+}
+
+.js .reveal.reveal-blur-up {
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease,
+    filter 0.8s ease;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Marquee editorial (cinta de categorías, home-2). GPU-friendly.             */
+/* -------------------------------------------------------------------------- */
+@keyframes marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 36s linear infinite;
+  will-change: transform;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
 }
 
 /* -------------------------------------------------------------------------- */

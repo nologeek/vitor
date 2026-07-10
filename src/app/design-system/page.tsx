@@ -19,6 +19,7 @@ import {
   geometricVariants,
 } from "@/components/motion/geometric-symbol";
 import { EditorialCaseLayout } from "@/components/sections/editorial-case-layout";
+import { EcosystemFlowDiagram } from "@/components/sections/ecosystem-flow-diagram";
 import { NumberedCard } from "@/components/cards/numbered-card";
 import { StepCard } from "@/components/cards/step-card";
 import { ProjectCard } from "@/components/cards/project-card";
@@ -39,6 +40,7 @@ import {
   usageRules,
   stickyStoryDemo,
   editorialCaseDemo,
+  flowDemo,
 } from "@/content/design-system";
 
 export const metadata = buildMetadata({
@@ -598,16 +600,17 @@ export default function DesignSystemPage() {
           id="fondo-global"
           index="11"
           title="Global Data Grid Background"
-          description="Capa fixed de grid + nodos/líneas que persiste durante el scroll del home. Sutil, con parallax leve y reacción al mouse (desktop); estática en mobile y con reduce-motion. Aquí se muestra una vista contenida; en el home es global."
+          description="Capa fixed de grid PARCIAL + nodos/líneas que persiste durante el scroll del home. El grid no cubre todo por igual: se concentra en una zona (esquina) y se desvanece con máscara/vignette; los nodos son sutiles pero perceptibles y reaccionan al mouse (desktop). Estático en mobile y con reduce-motion. Aquí, vista contenida; en el home es global."
         >
           <div className="relative h-64 overflow-hidden rounded-[var(--radius-card)] border border-border bg-bg">
             <div className="global-grid absolute inset-0" />
-            <DataNetworkBackground density={0.8} className="opacity-70" />
+            <DataNetworkBackground density={0.9} className="opacity-80" />
             <div className="global-grid-glow absolute inset-0" />
+            <div className="global-grid-vignette absolute inset-0" />
             <div className="relative flex h-full items-center justify-center">
               <p className="max-w-xs text-center text-sm text-muted">
-                El contenido siempre va por encima; el fondo no compite con la
-                lectura.
+                Grid parcial (arriba-derecha) + nodos. El contenido siempre va
+                por encima; el fondo no compite con la lectura.
               </p>
             </div>
           </div>
@@ -622,24 +625,25 @@ export default function DesignSystemPage() {
         <DSSection
           id="hero-editorial"
           index="12"
-          title="Hero editorial / premium"
-          description="Composición del hero: panel central redondeado (glass), avatar con anillo geométrico, etiqueta, H1 centrado, tags y CTAs. El H1 no se anima (LCP). Foto real reemplaza el placeholder de iniciales."
+          title="Hero editorial / premium (flotante)"
+          description="El contenido FLOTA sobre el fondo (sin card pesada): avatar con anillo geométrico (glass mínimo), etiqueta, H1 centrado y ancho en ~2 líneas, tags y CTAs. El H1 no se anima (LCP). Foto real reemplaza el placeholder de iniciales."
         >
-          <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-bg p-6 sm:p-10">
+          <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-bg p-8 sm:p-12">
             <div className="global-grid absolute inset-0 opacity-50" />
-            <div className="glass relative mx-auto max-w-xl rounded-[2rem] px-6 py-10 text-center">
+            <div className="global-grid-vignette absolute inset-0" />
+            <div className="relative mx-auto max-w-2xl text-center">
               <div className="relative mx-auto mb-6 h-20 w-20">
                 <GeometricSymbol
                   variant="orbit"
                   animate
-                  className="absolute inset-[-22%] text-accent opacity-70"
+                  className="absolute inset-[-24%] text-accent opacity-70"
                 />
-                <div className="absolute inset-0 flex items-center justify-center rounded-full border border-border bg-bg font-mono text-lg font-semibold">
+                <div className="glass absolute inset-0 flex items-center justify-center rounded-full font-mono text-lg font-semibold">
                   MA
                 </div>
               </div>
               <p className="font-mono text-xs text-accent">Hola, soy Manuel Ayala.</p>
-              <p className="mt-3 text-xl font-semibold tracking-tight text-gradient">
+              <p className="mt-3 text-2xl font-semibold tracking-tight text-gradient">
                 Ecosistemas digitales que generan crecimiento.
               </p>
               <div className="mt-5 flex flex-wrap justify-center gap-2">
@@ -683,10 +687,20 @@ export default function DesignSystemPage() {
           </div>
         </DSSection>
 
-        {/* 14 · Editorial Case */}
+        {/* 14 · Ecosystem Flow */}
+        <DSSection
+          id="flow"
+          index="14"
+          title="Ecosystem Flow / Proposal Transformation"
+          description="Diagrama de secuencia para representar transformaciones (entrada → salida) como arquitectura de sistema: nodos con símbolos geométricos conectados por una espina, con micro-animación al scroll. Estética de sistema, no infografía. Aplicado en el home en 'La propuesta'."
+        >
+          <EcosystemFlowDiagram items={flowDemo} />
+        </DSSection>
+
+        {/* 15 · Editorial Case */}
         <DSSection
           id="editorial-case"
-          index="14"
+          index="15"
           title="Editorial Case Layout"
           description="Patrón tipo case study para /portafolio (fases futuras): columna de metadatos (Year / Deliverables / Sector) + titular grande, divisoria fina y mucho aire. Solo prototipo; aún no aplicado a una ruta real."
         >
@@ -698,10 +712,10 @@ export default function DesignSystemPage() {
           />
         </DSSection>
 
-        {/* 15 · Reglas de uso */}
+        {/* 16 · Reglas de uso */}
         <DSSection
           id="reglas"
-          index="15"
+          index="16"
           title="Reglas de uso"
           description="Criterios para mantener coherencia visual y accesibilidad."
         >

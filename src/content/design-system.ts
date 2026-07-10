@@ -18,8 +18,18 @@ export const dsSections = [
   { id: "fondo-global", label: "Fondo global" },
   { id: "hero-editorial", label: "Hero editorial" },
   { id: "geometria", label: "Geometría" },
+  { id: "flow", label: "Ecosystem Flow" },
   { id: "editorial-case", label: "Editorial Case" },
   { id: "reglas", label: "Reglas de uso" },
+] as const;
+
+/* Transformaciones de ejemplo para el diagrama de flujo (mismo patrón que el
+   home usa en "La propuesta"). */
+export const flowDemo = [
+  { from: "Presencia digital", to: "Confianza y autoridad", variant: "node" },
+  { from: "Procesos", to: "Automatización", variant: "loop" },
+  { from: "Información", to: "Decisiones", variant: "diamond" },
+  { from: "Esfuerzos comerciales", to: "Crecimiento", variant: "orbit" },
 ] as const;
 
 /* Metadatos de ejemplo para el patrón EditorialCaseLayout (ilustrativos). */
@@ -205,12 +215,16 @@ export const usageRules: ReadonlyArray<{ title: string; body: string }> = [
     body: "Contraste suficiente en ambos temas, foco visible (ring), objetivos táctiles ≥ 40px, textos alternativos en imágenes.",
   },
   {
-    title: "Fondo global",
-    body: "Una sola instancia por página, siempre detrás del contenido (aria-hidden, pointer-events-none). Nunca sobre texto largo sin superficie. Baja opacidad; en mobile queda estático.",
+    title: "Grid del fondo",
+    body: "El grid NO debe dominar la interfaz: es parcial, se concentra en una zona (esquina) y se desvanece con máscara/vignette. Muy delicado en light, con algo más de profundidad en dark. Nunca a intensidad plena sobre toda la pantalla.",
+  },
+  {
+    title: "Nodos / data",
+    body: "Sutiles pero perceptibles: acento azul con baja opacidad, movimiento lento, reacción suave al mouse (desktop). Nunca compiten con texto ni CTAs. Estáticos en mobile y con reduce-motion. Una sola capa por página (aria-hidden, pointer-events-none).",
   },
   {
     title: "Geometría simbólica",
-    body: "SVG inline con acento azul y baja opacidad. Uso puntual (hero, y a futuro pilares/servicios/método), nunca decorativo en exceso. Rotación solo donde aporta y siempre con reduce-motion respetado.",
+    body: "SVG inline como símbolo de SISTEMA, no decoración aleatoria: líneas finas, acento azul, baja opacidad. Uso puntual (hero, diagrama de 'La propuesta', y a futuro pilares/servicios). Rotación solo donde aporta y siempre con reduce-motion respetado.",
   },
   {
     title: "Editorial / case study",

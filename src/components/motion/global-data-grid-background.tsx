@@ -49,10 +49,11 @@ export function GlobalDataGridBackground() {
       <div ref={gridRef} className="global-grid absolute -inset-[8%]" />
       <DataNetworkBackground
         pointerTarget="window"
-        density={0.65}
-        className="opacity-60"
+        density={0.8}
+        className="opacity-80"
       />
       <div className="global-grid-glow absolute inset-0" />
+      <div className="global-grid-vignette absolute inset-0" />
     </div>
   );
 }

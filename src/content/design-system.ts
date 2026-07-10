@@ -15,8 +15,20 @@ export const dsSections = [
   { id: "navegacion", label: "Navegación" },
   { id: "animaciones", label: "Animaciones" },
   { id: "motion", label: "Motion & Scroll" },
+  { id: "fondo-global", label: "Fondo global" },
+  { id: "hero-editorial", label: "Hero editorial" },
+  { id: "geometria", label: "Geometría" },
+  { id: "editorial-case", label: "Editorial Case" },
   { id: "reglas", label: "Reglas de uso" },
 ] as const;
+
+/* Metadatos de ejemplo para el patrón EditorialCaseLayout (ilustrativos). */
+export const editorialCaseDemo = {
+  year: "2025",
+  deliverables: ["Estrategia", "Plataforma", "Sistema de marca"],
+  sector: "Institucional",
+  title: "Un ecosistema digital que ordena la operación y acelera el crecimiento.",
+} as const;
 
 /* Pasos de demostración para el prototipo de sticky storytelling. */
 export const stickyStoryDemo: ReadonlyArray<{ title: string; body: string }> = [
@@ -191,5 +203,17 @@ export const usageRules: ReadonlyArray<{ title: string; body: string }> = [
   {
     title: "Accesibilidad",
     body: "Contraste suficiente en ambos temas, foco visible (ring), objetivos táctiles ≥ 40px, textos alternativos en imágenes.",
+  },
+  {
+    title: "Fondo global",
+    body: "Una sola instancia por página, siempre detrás del contenido (aria-hidden, pointer-events-none). Nunca sobre texto largo sin superficie. Baja opacidad; en mobile queda estático.",
+  },
+  {
+    title: "Geometría simbólica",
+    body: "SVG inline con acento azul y baja opacidad. Uso puntual (hero, y a futuro pilares/servicios/método), nunca decorativo en exceso. Rotación solo donde aporta y siempre con reduce-motion respetado.",
+  },
+  {
+    title: "Editorial / case study",
+    body: "Metadatos (Year/Deliverables/Sector) en columna, titular grande, divisoria fina y mucho aire. Blanco/negro; el azul solo en detalles. Reservado a portafolio/casos.",
   },
 ];

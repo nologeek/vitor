@@ -14,6 +14,11 @@ import { MotionCard } from "@/components/motion/motion-card";
 import { CinematicSection } from "@/components/motion/cinematic-section";
 import { StickyStorySection } from "@/components/motion/sticky-story-section";
 import { DataNetworkBackground } from "@/components/motion/data-network-background";
+import {
+  GeometricSymbol,
+  geometricVariants,
+} from "@/components/motion/geometric-symbol";
+import { EditorialCaseLayout } from "@/components/sections/editorial-case-layout";
 import { NumberedCard } from "@/components/cards/numbered-card";
 import { StepCard } from "@/components/cards/step-card";
 import { ProjectCard } from "@/components/cards/project-card";
@@ -33,6 +38,7 @@ import {
   sampleQuote,
   usageRules,
   stickyStoryDemo,
+  editorialCaseDemo,
 } from "@/content/design-system";
 
 export const metadata = buildMetadata({
@@ -587,10 +593,115 @@ export default function DesignSystemPage() {
           </div>
         </DSSection>
 
-        {/* 11 · Reglas de uso */}
+        {/* 11 · Fondo global */}
+        <DSSection
+          id="fondo-global"
+          index="11"
+          title="Global Data Grid Background"
+          description="Capa fixed de grid + nodos/líneas que persiste durante el scroll del home. Sutil, con parallax leve y reacción al mouse (desktop); estática en mobile y con reduce-motion. Aquí se muestra una vista contenida; en el home es global."
+        >
+          <div className="relative h-64 overflow-hidden rounded-[var(--radius-card)] border border-border bg-bg">
+            <div className="global-grid absolute inset-0" />
+            <DataNetworkBackground density={0.8} className="opacity-70" />
+            <div className="global-grid-glow absolute inset-0" />
+            <div className="relative flex h-full items-center justify-center">
+              <p className="max-w-xs text-center text-sm text-muted">
+                El contenido siempre va por encima; el fondo no compite con la
+                lectura.
+              </p>
+            </div>
+          </div>
+          <p className="mt-4 text-sm text-muted">
+            Uso: <code className="font-mono text-xs">GlobalDataGridBackground</code>{" "}
+            montado una vez por página (hoy solo en el home). Reutilizable en
+            otras rutas cuando se valide.
+          </p>
+        </DSSection>
+
+        {/* 12 · Hero editorial */}
+        <DSSection
+          id="hero-editorial"
+          index="12"
+          title="Hero editorial / premium"
+          description="Composición del hero: panel central redondeado (glass), avatar con anillo geométrico, etiqueta, H1 centrado, tags y CTAs. El H1 no se anima (LCP). Foto real reemplaza el placeholder de iniciales."
+        >
+          <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-bg p-6 sm:p-10">
+            <div className="global-grid absolute inset-0 opacity-50" />
+            <div className="glass relative mx-auto max-w-xl rounded-[2rem] px-6 py-10 text-center">
+              <div className="relative mx-auto mb-6 h-20 w-20">
+                <GeometricSymbol
+                  variant="orbit"
+                  animate
+                  className="absolute inset-[-22%] text-accent opacity-70"
+                />
+                <div className="absolute inset-0 flex items-center justify-center rounded-full border border-border bg-bg font-mono text-lg font-semibold">
+                  MA
+                </div>
+              </div>
+              <p className="font-mono text-xs text-accent">Hola, soy Manuel Ayala.</p>
+              <p className="mt-3 text-xl font-semibold tracking-tight text-gradient">
+                Ecosistemas digitales que generan crecimiento.
+              </p>
+              <div className="mt-5 flex flex-wrap justify-center gap-2">
+                <Tag>Branding</Tag>
+                <Tag>Software</Tag>
+                <Tag>IA</Tag>
+              </div>
+              <div className="mt-6 flex justify-center gap-3">
+                <MockPill primary>Hablemos</MockPill>
+                <MockPill>Ver proyectos</MockPill>
+              </div>
+            </div>
+          </div>
+        </DSSection>
+
+        {/* 13 · Geometría */}
+        <DSSection
+          id="geometria"
+          index="13"
+          title="Geometric Symbols"
+          description="Lenguaje geométrico en SVG inline: líneas finas, trazos punteados y puntos. Acento azul, baja opacidad. Algunas variantes rotan lento (respetan reduce-motion). Hoy solo se usa en el hero; el resto queda aquí para revisión antes de aplicarlo a pilares/servicios/método."
+        >
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {geometricVariants.map((g) => (
+              <figure
+                key={g.variant}
+                className="flex flex-col items-center rounded-[var(--radius-card)] border border-border bg-surface p-6 text-center"
+              >
+                <GeometricSymbol
+                  variant={g.variant}
+                  animate
+                  title={g.label}
+                  className="h-16 w-16 text-accent"
+                />
+                <figcaption className="mt-4">
+                  <p className="text-sm font-medium">{g.label}</p>
+                  <p className="mt-1 text-xs text-muted">{g.meaning}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </DSSection>
+
+        {/* 14 · Editorial Case */}
+        <DSSection
+          id="editorial-case"
+          index="14"
+          title="Editorial Case Layout"
+          description="Patrón tipo case study para /portafolio (fases futuras): columna de metadatos (Year / Deliverables / Sector) + titular grande, divisoria fina y mucho aire. Solo prototipo; aún no aplicado a una ruta real."
+        >
+          <EditorialCaseLayout
+            year={editorialCaseDemo.year}
+            deliverables={editorialCaseDemo.deliverables}
+            sector={editorialCaseDemo.sector}
+            title={editorialCaseDemo.title}
+          />
+        </DSSection>
+
+        {/* 15 · Reglas de uso */}
         <DSSection
           id="reglas"
-          index="11"
+          index="15"
           title="Reglas de uso"
           description="Criterios para mantener coherencia visual y accesibilidad."
         >

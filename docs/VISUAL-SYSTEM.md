@@ -6,24 +6,35 @@ narrativa; solo lenguaje visual, fondo, geometría y jerarquía.
 
 ## Fondo global — `GlobalDataGridBackground`
 
-Capa **fixed** (grid CSS + red de nodos en canvas 2D) que persiste durante todo
-el scroll del home.
+Capa **fixed** (grid CSS **parcial** + red de nodos en canvas 2D) que persiste
+durante todo el scroll del home.
 
-- Grid sutil por tema (light delicado, dark con algo más de profundidad),
-  máscara radial que desvanece los bordes.
-- Nodos/líneas de baja opacidad, movimiento lento, reacción suave al mouse
-  (desktop), parallax muy leve al scroll.
+- **Grid parcial**: no cubre todo por igual — se concentra en una zona (esquina
+  arriba-derecha) y se desvanece con máscara radial + vignette de profundidad.
+  Delicado en light, con algo más de cuerpo en dark. Nunca domina la pantalla.
+- Nodos/líneas **sutiles pero perceptibles** (acento azul, baja opacidad),
+  movimiento lento, reacción suave al mouse (desktop), parallax muy leve.
 - **Estático** en mobile y con `prefers-reduced-motion`; `aria-hidden` +
   `pointer-events-none` (no bloquea lectura ni interacción).
 - Una sola instancia por página. Hoy solo en el home (`src/app/page.tsx`);
   reutilizable en otras rutas cuando se valide.
 
-## Hero editorial — `sections/hero.tsx`
+## Hero editorial (flotante) — `sections/hero.tsx`
 
-Panel central redondeado (glass) con: avatar placeholder (iniciales **MA**) y
-anillo geométrico `orbit`, etiqueta, H1 centrado (sin animación, LCP), tags y
-CTAs. Los textos aprobados no cambian. La foto real reemplaza el placeholder
-sin tocar la estructura.
+El contenido **flota sobre el fondo** (sin card pesada): avatar placeholder
+(iniciales **MA**) con anillo geométrico `orbit` y glass mínimo, etiqueta, H1
+centrado y ancho (~2 líneas en desktop, `clamp()` para el tamaño), tags y CTAs.
+Los textos aprobados no cambian; el H1 no se anima (LCP). La foto real reemplaza
+el placeholder sin tocar la estructura.
+
+## Diagrama de flujo — `sections/ecosystem-flow-diagram.tsx`
+
+`EcosystemFlowDiagram`: secuencia de transformaciones (entrada → salida) como
+**arquitectura de sistema** — nodos con `GeometricSymbol` conectados por una
+espina, micro-animación por scroll (stagger). Aplicado en el home en **"La
+propuesta"** para representar `presencia digital → confianza`, `procesos →
+automatización`, `información → decisiones`, `esfuerzos comerciales →
+crecimiento`. No es infografía corporativa.
 
 ## Geometría simbólica — `motion/geometric-symbol.tsx`
 

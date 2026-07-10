@@ -8,28 +8,29 @@ import { hero } from "@/content/home";
 export function Hero() {
   return (
     <section className="relative">
-      <Container className="py-16 sm:py-24">
-        <div className="glass mx-auto max-w-3xl rounded-[2rem] px-6 py-14 text-center sm:px-14 sm:py-20">
-          {/* Avatar placeholder con anillo geométrico. Reemplazable por foto real. */}
-          <div className="relative mx-auto mb-8 h-28 w-28">
+      <Container className="py-24 sm:py-32">
+        {/* Contenido flotando sobre el fondo global (sin card). */}
+        <div className="mx-auto max-w-6xl text-center">
+          {/* Avatar placeholder con anillo geométrico (glass mínimo). */}
+          <div className="relative mx-auto mb-9 h-24 w-24 sm:h-28 sm:w-28">
             <GeometricSymbol
               variant="orbit"
               animate
-              className="absolute inset-[-22%] text-accent opacity-70"
+              className="absolute inset-[-24%] text-accent opacity-70"
             />
-            <div className="absolute inset-0 flex items-center justify-center rounded-full border border-border bg-bg font-mono text-2xl font-semibold tracking-tight">
+            <div className="glass absolute inset-0 flex items-center justify-center rounded-full font-mono text-2xl font-semibold tracking-tight">
               MA
             </div>
           </div>
 
-          {/* Etiqueta + H1 (se renderizan de inmediato, sin animación: LCP). */}
+          {/* Etiqueta + H1 se renderizan de inmediato (LCP), sin animación. */}
           <p className="font-mono text-sm text-accent">{hero.greeting}</p>
-          <h1 className="mx-auto mt-4 max-w-2xl text-balance text-3xl font-semibold leading-[1.12] tracking-tight sm:text-5xl">
+          <h1 className="mx-auto mt-5 max-w-6xl text-pretty text-[clamp(1.85rem,2.9vw,2.4rem)] font-semibold leading-[1.14] tracking-tight">
             <span className="text-gradient">{hero.headline}</span>
           </h1>
 
           <ul
-            className="mt-8 flex flex-wrap justify-center gap-2"
+            className="mt-9 flex flex-wrap justify-center gap-2"
             aria-label="Disciplinas"
           >
             {hero.tags.map((tag, i) => (

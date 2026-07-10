@@ -111,8 +111,8 @@ export function DataNetworkBackground({
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
           const dist = Math.hypot(dx, dy);
-          if (dist < 120 && dist > 0.5) {
-            const force = (1 - dist / 120) * 0.4;
+          if (dist < 150 && dist > 0.5) {
+            const force = (1 - dist / 150) * 0.6;
             p.x += (dx / dist) * force;
             p.y += (dy / dist) * force;
           }
@@ -126,7 +126,7 @@ export function DataNetworkBackground({
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.hypot(dx, dy);
           if (dist < maxDist) {
-            ctx!.strokeStyle = rgba((1 - dist / maxDist) * 0.16);
+            ctx!.strokeStyle = rgba((1 - dist / maxDist) * 0.22);
             ctx!.beginPath();
             ctx!.moveTo(nodes[i].x, nodes[i].y);
             ctx!.lineTo(nodes[j].x, nodes[j].y);
@@ -135,10 +135,10 @@ export function DataNetworkBackground({
         }
       }
 
-      ctx!.fillStyle = rgba(0.5);
+      ctx!.fillStyle = rgba(0.7);
       for (const p of nodes) {
         ctx!.beginPath();
-        ctx!.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx!.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
         ctx!.fill();
       }
     }

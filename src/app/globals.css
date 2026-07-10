@@ -325,30 +325,37 @@
       color-mix(in oklab, var(--border) 60%, transparent) 1px,
       transparent 1px
     );
-  background-size: 58px 58px;
-  opacity: 0.5;
+  background-size: 60px 60px;
+  opacity: 0.4;
+  /* Grid parcial: concentrado arriba-derecha, se desvanece hacia el resto. */
   -webkit-mask-image: radial-gradient(
-    ellipse 95% 75% at 50% 28%,
-    #000 45%,
-    transparent 100%
+    72% 62% at 84% -6%,
+    #000 12%,
+    transparent 64%
   );
-  mask-image: radial-gradient(
-    ellipse 95% 75% at 50% 28%,
-    #000 45%,
-    transparent 100%
-  );
+  mask-image: radial-gradient(72% 62% at 84% -6%, #000 12%, transparent 64%);
   will-change: transform;
 }
 
 [data-theme="dark"] .global-grid {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
+/* Halo de acento muy sutil arriba (profundidad). */
 .global-grid-glow {
   background: radial-gradient(
-    ellipse 60% 38% at 50% -4%,
-    color-mix(in oklab, var(--accent-2) 9%, transparent),
-    transparent 70%
+    ellipse 55% 34% at 78% -6%,
+    color-mix(in oklab, var(--accent-2) 10%, transparent),
+    transparent 72%
+  );
+}
+
+/* Vignette de profundidad: desvanece los bordes hacia el fondo base. */
+.global-grid-vignette {
+  background: radial-gradient(
+    130% 105% at 50% 0%,
+    transparent 42%,
+    color-mix(in oklab, var(--bg) 72%, transparent) 100%
   );
 }
 

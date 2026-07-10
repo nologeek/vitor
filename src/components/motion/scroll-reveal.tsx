@@ -17,7 +17,13 @@ export function ScrollReveal({
   children,
 }: {
   as?: ElementType;
-  animation?: "fade-in" | "slide-up" | "depth-right" | "draw" | "tilt-up";
+  animation?:
+    | "fade-in"
+    | "slide-up"
+    | "depth-right"
+    | "draw"
+    | "tilt-up"
+    | "blur-up";
   /** Retardo en ms para efecto stagger en listas/grids. */
   delay?: number;
   className?: string;

@@ -1,25 +1,27 @@
-import { Section } from "@/components/sections/section";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { NumberedCard } from "@/components/cards/numbered-card";
-import { ScrollReveal } from "@/components/motion/scroll-reveal";
+import { Container } from "@/components/ui/container";
+import { SevenPillarsMap } from "@/components/sections/seven-pillars-map";
 import { pillars } from "@/content/home";
 
 export function Pillars() {
   return (
-    <Section id="pilares" divider>
-      <SectionHeading eyebrow={pillars.eyebrow} title={pillars.title} />
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {pillars.items.map((item, i) => (
-          <ScrollReveal as="div" animation="slide-up" delay={i * 70} key={item.title}>
-            <NumberedCard
-              motion
-              index={i + 1}
-              title={item.title}
-              description={item.description}
-            />
-          </ScrollReveal>
-        ))}
-      </div>
-    </Section>
+    <section id="pilares" className="relative py-24 sm:py-36">
+      <div
+        aria-hidden="true"
+        className="section-depth pointer-events-none absolute inset-0 -z-10"
+      />
+      <Container>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+            {pillars.label}
+          </p>
+          <h2 className="mt-6 text-balance text-3xl font-semibold leading-[1.14] tracking-tight sm:text-5xl">
+            {pillars.title}
+          </h2>
+        </div>
+        <div className="mt-16">
+          <SevenPillarsMap items={pillars.items} />
+        </div>
+      </Container>
+    </section>
   );
 }

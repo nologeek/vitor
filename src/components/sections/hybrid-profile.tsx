@@ -7,7 +7,7 @@ import { hybridProfile } from "@/content/home";
 export function HybridProfile() {
   return (
     <Section id="perfil-hibrido" divider>
-      <SectionHeading eyebrow={hybridProfile.eyebrow} title={hybridProfile.title}>
+      <SectionHeading eyebrow={hybridProfile.label} title={hybridProfile.title}>
         {hybridProfile.body}
       </SectionHeading>
       <ul className="mt-8 flex flex-wrap gap-2" aria-label="Capacidades">

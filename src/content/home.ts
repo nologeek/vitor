@@ -1,7 +1,8 @@
 /**
- * Contenido FINAL del home (aprobado por Manuel). Estructura orientada a
- * storytelling con narrativa Círculo Dorado: WHY → HOW → WHAT.
- * El enfoque es la solución/el sistema/el valor para organizaciones.
+ * Contenido FINAL del home (aprobado por Manuel). Storytelling por scroll:
+ * Oportunidad → Más allá del marketing → Propuesta → Pilares → Método →
+ * Qué se puede construir → Portafolio → Para quién → CTA.
+ * Los labels ya no usan etiquetas WHY/HOW ni textos en inglés.
  */
 
 export const hero = {
@@ -20,23 +21,25 @@ export const hero = {
   secondaryCta: { label: "Ver proyectos", href: "/portafolio" },
 } as const;
 
-/* WHY --------------------------------------------------------------------- */
+/* Oportunidad ------------------------------------------------------------- */
 
 export const opportunity = {
-  eyebrow: "WHY · La oportunidad",
+  label: "Oportunidad",
   title:
     "El crecimiento ocurre cuando la marca, el negocio, la operación y la tecnología trabajan en la misma dirección.",
-  lines: [
-    "Una presencia digital puede atraer.",
-    "Una marca puede generar confianza.",
-    "Una estrategia puede abrir mercado.",
-    "Un sistema puede ordenar procesos.",
-    "Y la inteligencia artificial puede acelerar la forma en que una organización aprende, decide y crece.",
+  points: [
+    "Presencia digital que atrae",
+    "Marca que genera confianza",
+    "Estrategia que abre mercado",
+    "Sistema que ordena procesos",
+    "IA que acelera aprendizaje, decisión y crecimiento",
   ],
 } as const;
 
+/* Más allá del marketing ---------------------------------------------------- */
+
 export const beyondMarketing = {
-  eyebrow: "WHY · Más allá del marketing",
+  label: "Más allá del marketing",
   title: "El marketing por sí solo no resuelve el crecimiento.",
   paragraphs: [
     "Una organización también necesita claridad de negocio, propuesta de valor, procesos, datos, tecnología y capacidad de ejecución.",
@@ -46,13 +49,15 @@ export const beyondMarketing = {
     "El reto es construir sistemas donde la estrategia empresarial, la marca, el marketing, la operación, el software, los datos y la inteligencia artificial se integren para generar valor.",
 } as const;
 
-/* HOW --------------------------------------------------------------------- */
+/* La propuesta -------------------------------------------------------------- */
 
 export const proposal = {
-  eyebrow: "HOW · La propuesta",
+  label: "La propuesta",
   title: "Diseñar ecosistemas que conecten lo importante.",
   intro:
     "Negocio, marca, marketing, operación, software, datos e inteligencia artificial.",
+  /** Palabra central del diagrama orbital (viene del copy aprobado). */
+  coreLabel: "Ecosistema",
   transformations: [
     { from: "Presencia digital", to: "Confianza y autoridad" },
     { from: "Procesos", to: "Automatización" },
@@ -61,9 +66,12 @@ export const proposal = {
   ],
 } as const;
 
+/* Pilares (7) ---------------------------------------------------------------- */
+
 export const pillars = {
-  eyebrow: "HOW · Pilares del ecosistema",
-  title: "Seis pilares conectados para construir ecosistemas digitales completos.",
+  label: "Pilares del ecosistema",
+  title:
+    "Siete pilares conectados para construir ecosistemas digitales de crecimiento.",
   items: [
     {
       title: "Estrategia empresarial y modelo de negocio",
@@ -91,15 +99,22 @@ export const pillars = {
         "Investigación de mercado, comportamiento humano, análisis de sistemas, métricas, reportes, dashboards y toma de decisiones.",
     },
     {
-      title: "Inteligencia artificial, automatización y educación",
+      title: "Inteligencia artificial y automatización",
       description:
-        "Agentes, asistentes, flujos inteligentes, automatización de procesos, transferencia de conocimiento, formación y adopción tecnológica.",
+        "Agentes, asistentes, flujos inteligentes y automatización de procesos.",
+    },
+    {
+      title: "Educación, capacitación y transferencia de conocimiento",
+      description:
+        "Transferencia de conocimiento, formación y adopción tecnológica.",
     },
   ],
 } as const;
 
+/* Método ---------------------------------------------------------------------- */
+
 export const method = {
-  eyebrow: "HOW · Método de trabajo",
+  label: "Método de trabajo",
   title: "Toda evolución necesita una arquitectura.",
   intro:
     "El trabajo empieza por entender el negocio, leer el ecosistema y encontrar qué debe conectarse para generar valor.",
@@ -132,10 +147,10 @@ export const method = {
   ],
 } as const;
 
-/* WHAT -------------------------------------------------------------------- */
+/* Qué se puede construir ------------------------------------------------------- */
 
 export const assets = {
-  eyebrow: "WHAT · Qué se puede construir",
+  label: "Qué se puede construir",
   title:
     "Cada ecosistema puede tomar una forma distinta según el momento de la organización.",
   scenarios: [
@@ -181,8 +196,10 @@ export const assets = {
   ],
 } as const;
 
+/* Portafolio -------------------------------------------------------------------- */
+
 export const portfolio = {
-  eyebrow: "WHAT · Portafolio",
+  label: "Portafolio",
   title:
     "Sistemas, plataformas y estrategias donde todo se integra para crecer.",
   paragraphs: [
@@ -202,10 +219,10 @@ export const portfolio = {
   cta: { label: "Ver portafolio", href: "/portafolio" },
 } as const;
 
-/* Cierre ------------------------------------------------------------------ */
+/* Perfil híbrido (OCULTO en el home por ahora; el contenido se conserva) -------- */
 
 export const hybridProfile = {
-  eyebrow: "Perfil híbrido",
+  label: "Perfil híbrido",
   title: "Una mirada híbrida para construir soluciones completas.",
   body: "Administración, marketing, branding, educación, investigación, software e inteligencia artificial se integran para leer el negocio, diseñar la estrategia, construir la solución y acompañar a los equipos en nuevas formas de trabajar.",
   tags: [
@@ -220,18 +237,31 @@ export const hybridProfile = {
   ],
 } as const;
 
+/* Para quién ---------------------------------------------------------------------- */
+
 export const audience = {
-  eyebrow: "Para quién es este trabajo",
+  label: "Para quién es este trabajo",
   title: "Para organizaciones que quieren crecer con más claridad.",
   items: [
-    "Empresas que buscan ordenar su estrategia digital.",
-    "Marcas que quieren confianza y autoridad.",
-    "Instituciones que necesitan plataformas y mejores procesos.",
-    "Equipos que quieren automatizar su operación.",
-    "Gremios que gestionan información y generan valor.",
-    "Proyectos educativos que crean experiencias de aprendizaje.",
+    { type: "Empresas", text: "Empresas que buscan ordenar su estrategia digital." },
+    { type: "Marcas", text: "Marcas que quieren confianza y autoridad." },
+    {
+      type: "Instituciones",
+      text: "Instituciones que necesitan plataformas y mejores procesos.",
+    },
+    { type: "Equipos", text: "Equipos que quieren automatizar su operación." },
+    {
+      type: "Gremios",
+      text: "Gremios que gestionan información y generan valor.",
+    },
+    {
+      type: "Proyectos educativos",
+      text: "Proyectos educativos que crean experiencias de aprendizaje.",
+    },
   ],
 } as const;
+
+/* CTA final ------------------------------------------------------------------------ */
 
 export const finalCta = {
   title:

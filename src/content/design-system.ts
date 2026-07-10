@@ -19,6 +19,13 @@ export const dsSections = [
   { id: "hero-editorial", label: "Hero editorial" },
   { id: "geometria", label: "Geometría" },
   { id: "flow", label: "Ecosystem Flow" },
+  { id: "editorial", label: "Editorial Section" },
+  { id: "orbit", label: "Proposal Orbit" },
+  { id: "pillars-map", label: "Pillars Map" },
+  { id: "pathway", label: "Method Pathway" },
+  { id: "depth-cards", label: "Depth Cards" },
+  { id: "char-reveal", label: "Character Reveal" },
+  { id: "footer", label: "Footer" },
   { id: "editorial-case", label: "Editorial Case" },
   { id: "reglas", label: "Reglas de uso" },
 ] as const;

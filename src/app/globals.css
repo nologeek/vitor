@@ -362,6 +362,75 @@
 /* -------------------------------------------------------------------------- */
 /*  Geometría simbólica: rotaciones lentas (solo-transform, GPU).              */
 /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*  Storytelling: reveals con profundidad 3D liviana (solo transform, GPU).    */
+/*  El estado oculto solo aplica con JS (.js); sin JS todo es visible.         */
+/* -------------------------------------------------------------------------- */
+.depth-scene {
+  perspective: 1200px;
+}
+
+/* Entrada desde la derecha con profundidad (cards de activos). */
+.js .reveal-depth-right {
+  transform: translate3d(64px, 0, -48px) rotateY(-6deg);
+}
+
+/* Conector que se "dibuja" de arriba hacia abajo (método). */
+.js .reveal-draw {
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+/* Panel que entra con leve inclinación (método). */
+.js .reveal-tilt-up {
+  transform: translate3d(0, 26px, -30px) rotateX(5deg);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Reveal tipográfico por caracteres (Más allá del marketing / portafolio).   */
+/* -------------------------------------------------------------------------- */
+.js .char-reveal .cr-char {
+  opacity: 0;
+  transform: translateY(0.35em);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: var(--crd, 0ms);
+  will-change: opacity, transform;
+}
+
+.js .char-reveal.reveal-visible .cr-char {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .char-reveal .cr-char {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Gradientes de profundidad por sección (separación sin líneas duras).       */
+/* -------------------------------------------------------------------------- */
+.section-depth {
+  background: radial-gradient(
+    90% 70% at 50% 30%,
+    color-mix(in oklab, var(--accent-2) 6%, transparent),
+    transparent 75%
+  );
+}
+
+.section-fade-bottom {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in oklab, var(--bg) 55%, transparent)
+  );
+}
+
 @keyframes gs-spin {
   to {
     transform: rotate(360deg);
